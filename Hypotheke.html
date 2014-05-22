@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+ <style>
+
+ body {
+   font: 10px sans-serif;
+ }
+
+ .axis path,
+ .axis line {
+   fill: none;
+   stroke: #000;
+   shape-rendering: crispEdges;
+ }
+
+ .x.axis path {
+   /*display: none;*/
+ }
+
+ .line {
+   fill: none;
+   stroke: steelblue;
+   stroke-width: 1.5px;
+ }
+
+ .line2 {
+   fill: none;
+   stroke: orange;
+   stroke-width: 1.5px;
+ }
+
+ .line3 {
+   fill: none;
+   stroke: blue;
+   stroke-width: 1.5px;
+ }
+
+ .line4 {
+   fill: none;
+   stroke: red;
+   stroke-width: 1.5px;
+ }
+
+ </style>
+ <html>
+ <head>
+   <!-- SCROLLS -->
+   <!-- load bootstrap and fontawesome via CDN -->
+   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
+ </head>
+
+ <body>
+
+ <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" value="2" /><br />
+
+ <script>
+
+  (function () {
+   'use strict';
+
+   var hipoteca = {
+    n : 360,
+    i : 2 / 1200,
+    C : 150000,
+    getCuota : function () {
+     return (this.C * this.i) / (1 - Math.pow(1 + this.i, -1 * this.n));
+    }
+   };
+
+   function AddToTabla(h,j,k,i,kt,it) {
+    h.push({
+     periodo : j,
+     capitalPeriodo : k,
+     interesPeriodo : i,
+     capitalTotal: kt,
+     interesTotal: it
+     }
+    )
+   }
+
+   function calculateAmortizationTable(h) {
+    var n = h.n,
+     i = h.i,
+     c = h.getCuota(),
+     k = h.C,
+     j = 0,
+     kp = 0,
+     ip = 0,
+     kt = 0,
+     it = 0,
+     d = 0,
+     tabla = [];
+
+    while (n > 0) {
+     n -= 1;
+     j += 1;
+
+     if (n > 0)
+     {
+      kp = c - i * k;
+      ip = i * k;
+      kt += kp;
+      it += ip;
+      d = (1 + i) * k - c;
+      AddToTabla(tabla, j, kp, ip, kt, it);
+     }
+     else
+     {
+      AddToTabla(tabla, j, k, i * k, kt, it);
+     }
+     k = d;
+    }
+
+    return tabla;
+   }
+
+   var margin = {top: 20, right: 30, bottom: 30, left: 70},
+    width = 900 - margin.left - margin.right,
+
+
+    height = 500 - margin.top - margin.bottom;
+   var x = d3.scale.linear()
+    .range([0, width-margin.left]);
+
+   var y = d3.scale.linear()
+    .range([height, 0]);
+
+   var yTotal = d3.scale.linear()
+    .range([height, 0]);
+
+   var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+   var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+   var yAxisTotal = d3.svg.axis()
+    .scale(yTotal)
+    .orient("left");
+
+   var lineCapital = d3.svg.line()
+    .x(function(d) { return x(d.periodo); })
+    .y(function(d) { return y(d.capitalPeriodo); });
+
+   var lineInteres = d3.svg.line()
+    .x(function(d) { return x(d.periodo); })
+    .y(function(d) { return y(d.interesPeriodo); });
+
+   var lineCapitalTotal = d3.svg.line()
+    .x(function(d) { return x(d.periodo); })
+    .y(function(d) { return yTotal(d.capitalTotal); });
+
+   var lineInteresTotal = d3.svg.line()
+    .x(function(d) { return x(d.periodo); })
+    .y(function(d) { return yTotal(d.interesTotal); });
+
+   var globalSvg = d3.select("body").append("svg")
+    .attr("width", 2*(width + margin.left + margin.right))
+
+    .attr("height", height + margin.top + margin.bottom);
+   var svgPeriodo = globalSvg
+    .append("g")
+    .attr("id","porPeriodo")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+   var svgAcumulado = globalSvg
+
+
+    .append("g")
+    .attr("id","total")
+    .attr("transform", "translate(" + (+margin.left + +width + +margin.right) + "," + margin.top + ")");
+   var data = calculateAmortizationTable(hipoteca);
+
+       x.domain(d3.extent(data, function(d) { return d.periodo; }));
+       y.domain([0,d3.max(data, function(d) { return Math.max(d.capitalPeriodo, d.interesPeriodo); })]);
+       yTotal.domain([0,d3.max(data, function(d) { return Math.max(d.capitalTotal, d.interesTotal); })]);
+
+     svgPeriodo.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+     svgPeriodo.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("€ Periodo");
+
+    svgAcumulado.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(" + 0 + "," + height + ")")
+      .call(xAxis);
+     svgAcumulado.append("g")
+      .attr("class", "y axis")
+      .call(yAxisTotal)
+    .append("text")
+      .attr("transform", "rotate(-90) translate(" + width + ")")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("€ Totales");
+
+     svgPeriodo.append("path")
+      .datum(data)
+      .attr("class", "line")
+      .attr("d", lineCapital);
+
+     svgPeriodo.append("path")
+      .datum(data)
+      .attr("class", "line2")
+      .attr("d", lineInteres);
+
+
+     svgAcumulado.append("path")
+      .datum(data)
+      .attr("class", "line3")
+      .attr("d", lineCapitalTotal);
+
+        svgAcumulado.append("path")
+      .datum(data)
+      .attr("class", "line4")
+      .attr("d", lineInteresTotal);
+
+   function changeValue() {
+             var interest = document.getElementById("rangeInterest").value;
+    hipoteca.i = interest / 1200;
+    data = calculateAmortizationTable(hipoteca);  
+
+    y.domain([0,d3.max(data, function(d) { return Math.max(d.capitalPeriodo, d.interesPeriodo); })]);
+    yTotal.domain([0,d3.max(data, function(d) { return Math.max(d.capitalTotal, d.interesTotal); })]);
+
+    d3.select(".line")
+     .datum(data)
+     .attr("d",lineCapital);
+
+    d3.select(".line2")
+     .datum(data)
+     .attr("d",lineInteres);
+
+    d3.select(".line3")
+     .datum(data)
+     .attr("d",lineCapitalTotal);
+    d3.select(".line4")
+     .datum(data)
+     .attr("d",lineInteresTotal);
+   }
+
+    document.getElementById("rangeInterest").addEventListener('change', changeValue, false);
+
+
+  }());
+
+
+
+
+ </script>
+ </body>
+ </html>
