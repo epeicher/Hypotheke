@@ -1,0 +1,38 @@
+body {
+   font: 10px sans-serif;
+ }
+
+ .axis path,
+ .axis line {
+   fill: none;
+   stroke: #000;
+   shape-rendering: crispEdges;
+ }
+
+ .x.axis path {
+   /*display: none;*/
+ }
+
+ .line {
+   fill: none;
+   stroke: steelblue;
+   stroke-width: 1.5px;
+ }
+
+ .line2 {
+   fill: none;
+   stroke: orange;
+   stroke-width: 1.5px;
+ }
+
+ .line3 {
+   fill: none;
+   stroke: blue;
+   stroke-width: 1.5px;
+ }
+
+ .line4 {
+   fill: none;
+   stroke: red;
+   stroke-width: 1.5px;
+ }

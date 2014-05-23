@@ -1,61 +1,3 @@
-<!DOCTYPE html>
- <style>
-
- body {
-   font: 10px sans-serif;
- }
-
- .axis path,
- .axis line {
-   fill: none;
-   stroke: #000;
-   shape-rendering: crispEdges;
- }
-
- .x.axis path {
-   /*display: none;*/
- }
-
- .line {
-   fill: none;
-   stroke: steelblue;
-   stroke-width: 1.5px;
- }
-
- .line2 {
-   fill: none;
-   stroke: orange;
-   stroke-width: 1.5px;
- }
-
- .line3 {
-   fill: none;
-   stroke: blue;
-   stroke-width: 1.5px;
- }
-
- .line4 {
-   fill: none;
-   stroke: red;
-   stroke-width: 1.5px;
- }
-
- </style>
- <html>
- <head>
-   <!-- SCROLLS -->
-   <!-- load bootstrap and fontawesome via CDN -->
-   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
-   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
-   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
- </head>
-
- <body>
-
- <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" value="2" /><br />
-
- <script>
-
   (function () {
    'use strict';
 
@@ -200,7 +142,7 @@
       .attr("class", "y axis")
       .call(yAxisTotal)
     .append("text")
-      .attr("transform", "rotate(-90) translate(" + width + ")")
+      .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
@@ -222,13 +164,18 @@
       .attr("class", "line3")
       .attr("d", lineCapitalTotal);
 
-        svgAcumulado.append("path")
+     svgAcumulado.append("path")
       .datum(data)
       .attr("class", "line4")
       .attr("d", lineInteresTotal);
 
+    function updateInterestRate(v){
+      document.getElementById("interestRate").innerHTML = v;
+    }
+
    function changeValue() {
-             var interest = document.getElementById("rangeInterest").value;
+    var interest = document.getElementById("rangeInterest").value;
+    updateInterestRate(interest);
     hipoteca.i = interest / 1200;
     data = calculateAmortizationTable(hipoteca);  
 
@@ -252,13 +199,6 @@
    }
 
     document.getElementById("rangeInterest").addEventListener('change', changeValue, false);
-
+    document.getElementById("interestRate").innerHTML = document.getElementById("rangeInterest").value;
 
   }());
-
-
-
-
- </script>
- </body>
- </html>
