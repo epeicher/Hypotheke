@@ -58,12 +58,12 @@
    }
 
    var margin = {top: 20, right: 30, bottom: 30, left: 70},
-    width = 900 - margin.left - margin.right,
+       browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+       width = browserWidth - margin.left - margin.right,
+       height = 500 - margin.top - margin.bottom;
 
-
-    height = 500 - margin.top - margin.bottom;
    var x = d3.scale.linear()
-    .range([0, width-margin.left]);
+    .range([0, (width-2*margin.right-margin.left)/2]);
 
    var y = d3.scale.linear()
     .range([height, 0]);
@@ -99,10 +99,11 @@
     .x(function(d) { return x(d.periodo); })
     .y(function(d) { return yTotal(d.interesTotal); });
 
-   var globalSvg = d3.select("body").append("svg")
-    .attr("width", 2*(width + margin.left + margin.right))
-
+   var globalSvg = d3.select("#containerSvg")   
+    .append("svg")
+    .attr("width", width+margin.right)
     .attr("height", height + margin.top + margin.bottom);
+
    var svgPeriodo = globalSvg
     .append("g")
     .attr("id","porPeriodo")
@@ -112,7 +113,7 @@
 
     .append("g")
     .attr("id","total")
-    .attr("transform", "translate(" + (+margin.left + +width + +margin.right) + "," + margin.top + ")");
+    .attr("transform", "translate(" + ( +width/2 + 2*margin.right) + "," + margin.top + ")");
    var data = calculateAmortizationTable(hipoteca);
 
        x.domain(d3.extent(data, function(d) { return d.periodo; }));
