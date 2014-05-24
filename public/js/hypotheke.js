@@ -179,6 +179,11 @@
       document.getElementById("interestRate").innerHTML = document.getElementById("rangeInterest").value;
     }
 
+    function updateTotalInterestPaid(d) {
+      var totalInterest = d.slice(-1).pop().interesTotal;
+      document.getElementById("totalInterestPaid").innerHTML = totalInterest;
+    }
+
     function getHipotecaData() {
       var interest = document.getElementById("rangeInterest").value;
       var capital = document.getElementById("iCapital").value;
@@ -190,11 +195,17 @@
       return hipoteca;
     }
 
+    function updateData(d) {
+          updateInterestRate();
+          updateTotalInterestPaid(d);
+    }
+
    function changeValue() {
 
-    updateInterestRate();
     var hipoteca = getHipotecaData();
     data = calculateAmortizationTable(hipoteca);  
+
+    updateData(data);
 
     x.domain(d3.extent(data, function(d) { return d.periodo; }));
     y.domain([0,d3.max(data, function(d) { return Math.max(d.capitalPeriodo, d.interesPeriodo); })]);
