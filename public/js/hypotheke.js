@@ -109,11 +109,10 @@
     .attr("id","porPeriodo")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
    var svgAcumulado = globalSvg
-
-
     .append("g")
     .attr("id","total")
     .attr("transform", "translate(" + ( +width/2 + 2*margin.right) + "," + margin.top + ")");
+
    var data = calculateAmortizationTable(hipoteca);
 
        x.domain(d3.extent(data, function(d) { return d.periodo; }));
@@ -121,11 +120,13 @@
        yTotal.domain([0,d3.max(data, function(d) { return Math.max(d.capitalTotal, d.interesTotal); })]);
 
      svgPeriodo.append("g")
+      .attr("id", "xAxis")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
 
      svgPeriodo.append("g")
+      .attr("id", "yAxis")
       .attr("class", "y axis")
       .call(yAxis)
     .append("text")
@@ -136,12 +137,16 @@
       .text("€ Periodo");
 
     svgAcumulado.append("g")
+      .attr("id", "xAxisTotal")
       .attr("class", "x axis")
       .attr("transform", "translate(" + 0 + "," + height + ")")
       .call(xAxis);
+
      svgAcumulado.append("g")
       .attr("class", "y axis")
+      .attr("id", "yAxisTotal")
       .call(yAxisTotal)
+
     .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
@@ -171,17 +176,34 @@
       .attr("d", lineInteresTotal);
 
     function updateInterestRate(v){
-      document.getElementById("interestRate").innerHTML = v;
+      document.getElementById("interestRate").innerHTML = document.getElementById("rangeInterest").value;
+    }
+
+    function getHipotecaData() {
+      var interest = document.getElementById("rangeInterest").value;
+      var capital = document.getElementById("iCapital").value;
+      var periodos = document.getElementById("iPeriodos").value;
+      hipoteca.i = interest / 1200;
+      hipoteca.C = capital || hipoteca.C;
+      hipoteca.n = periodos || hipoteca.n;
+
+      return hipoteca;
     }
 
    function changeValue() {
-    var interest = document.getElementById("rangeInterest").value;
-    updateInterestRate(interest);
-    hipoteca.i = interest / 1200;
+
+    updateInterestRate();
+    var hipoteca = getHipotecaData();
     data = calculateAmortizationTable(hipoteca);  
 
+    x.domain(d3.extent(data, function(d) { return d.periodo; }));
     y.domain([0,d3.max(data, function(d) { return Math.max(d.capitalPeriodo, d.interesPeriodo); })]);
     yTotal.domain([0,d3.max(data, function(d) { return Math.max(d.capitalTotal, d.interesTotal); })]);
+
+    d3.select("#xAxis").call(xAxis);
+    d3.select("#xAxisTotal").call(xAxis);
+    d3.select("#yAxis").call(yAxis);
+    d3.select("#yAxisTotal").call(yAxisTotal);
 
     d3.select(".line")
      .datum(data)
@@ -200,6 +222,8 @@
    }
 
     document.getElementById("rangeInterest").addEventListener('change', changeValue, false);
+    document.getElementById("iCapital").addEventListener('change', changeValue, false);
+    document.getElementById("iPeriodos").addEventListener('change', changeValue, false);
     document.getElementById("interestRate").innerHTML = document.getElementById("rangeInterest").value;
 
   }());

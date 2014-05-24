@@ -4,7 +4,7 @@
  <!-- load bootstrap and fontawesome via CDN -->
  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
  <link rel="stylesheet" type="text/css" href="css/hypotheke.css">
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
+ <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script> -->
  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
 </head>
 
@@ -16,33 +16,30 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <div ng-controller="HypoController">
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <label for="iCapital" class="col-sm-2 control-label" ng-model="hipoteca.capital">Capital</label>
-              <div class="col-sm-4">
-                <input type="number" class="form-control" id="iCapital" placeholder="Capital">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="iPeriodos" class="col-sm-2 control-label" ng-model="hipoteca.periodos">Meses</label>
-                <div class="col-sm-4">
-                  <input type="number" class="form-control" id="iPeriodos" placeholder="Numero de meses">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for"rangeInterest" class="col-sm-2 control-label">Interest Rate: </label>     
-                  <div class="col-sm-3">      
-                  <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" value="2" class="rangeInterest" />
-                </div>
-                   <span id="interestRate" class="col-sm-1"></span>
-
-                </div>
-              </form>
-            </div>           
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="iCapital" class="col-sm-2 control-label">Capital</label>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" id="iCapital" placeholder="Capital">
+            </div>
           </div>
-        </div>    
-      </div>
-    <script src="js/hypotheke.js" charset="utf-8"></script> 
-  </body>
-  </html>
+          <div class="form-group">
+            <label for="iPeriodos" class="col-sm-2 control-label">Meses</label>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" id="iPeriodos" placeholder="Numero de meses">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for"rangeInterest" class="col-sm-2 control-label">Interest Rate: </label>     
+            <div class="col-sm-3">      
+              <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" value="2" step="0.1" class="rangeInterest" />
+            </div>
+            <span id="interestRate" class="col-sm-1"></span>
+          </div>
+        </form>
+      </div>           
+    </div>    
+  </div>
+  <script src="js/hypotheke.js" charset="utf-8"></script> 
+</body>
+</html>
