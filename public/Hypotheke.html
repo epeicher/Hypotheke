@@ -20,7 +20,7 @@
           <div class="form-group">
             <label for="iCapital" class="col-sm-3 control-label">Capital</label>
             <div class="col-sm-4">
-              <input type="number" class="form-control" id="iCapital" placeholder="Capital">
+              <input type="number" step="10000" class="form-control" id="iCapital" placeholder="Capital">
             </div>
           </div>
           <div class="form-group">
@@ -34,13 +34,15 @@
             <div class="col-sm-3">      
               <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" value="2" step="0.1" class="rangeInterest" />
             </div>
-            <span id="interestRate" class="col-sm-1"></span>
+            <label id="interestRate" class="col-sm-1 control-label"></span>
           </div>
           <div class="form-group">
-            <label for"totalInterestPaid" class="col-sm-3 control-label">Total Interests paid:</label>
-            <div class="col-sm-3">      
-              <span id="totalInterestPaid" class="col-sm-4"></span>
-            </div>            
+            <label for"totalInterestPaid" class="col-sm-3 control-label">Total Interests paid:</label>                
+              <label id="totalInterestPaid" class="col-sm-4 control-label"></label>            
+          </div>
+          <div class="form-group">
+            <label for"cuota" class="col-sm-3 control-label">Payment:</label>                
+              <label id="cuota" class="col-sm-4 control-label"></label>            
           </div>          
         </form>
       </div>           

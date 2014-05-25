@@ -181,7 +181,19 @@
 
     function updateTotalInterestPaid(d) {
       var totalInterest = d.slice(-1).pop().interesTotal;
-      document.getElementById("totalInterestPaid").innerHTML = totalInterest;
+      document.getElementById("totalInterestPaid").innerHTML = totalInterest;      
+    }
+
+    function updatePayment(h){
+      document.getElementById("cuota").innerHTML = h.getCuota();
+    }
+
+    function updateCapital(h){
+      document.getElementById("iCapital").value = h.C;
+    }
+
+        function updatePeriods(h){
+      document.getElementById("iPeriodos").value = h.n;
     }
 
     function getHipotecaData() {
@@ -195,9 +207,12 @@
       return hipoteca;
     }
 
-    function updateData(d) {
+    function updateData(d,h) {
           updateInterestRate();
           updateTotalInterestPaid(d);
+          updatePayment(h);
+          updateCapital(h);
+          updatePeriods(h);
     }
 
    function changeValue() {
@@ -205,7 +220,7 @@
     var hipoteca = getHipotecaData();
     data = calculateAmortizationTable(hipoteca);  
 
-    updateData(data);
+    updateData(data,hipoteca);
 
     x.domain(d3.extent(data, function(d) { return d.periodo; }));
     y.domain([0,d3.max(data, function(d) { return Math.max(d.capitalPeriodo, d.interesPeriodo); })]);
@@ -232,9 +247,15 @@
      .attr("d",lineInteresTotal);
    }
 
+   function initializeData() {
+    var hipoteca = getHipotecaData();
+    data = calculateAmortizationTable(hipoteca); 
+    updateData(data,hipoteca); 
+   }
+
     document.getElementById("rangeInterest").addEventListener('change', changeValue, false);
     document.getElementById("iCapital").addEventListener('change', changeValue, false);
     document.getElementById("iPeriodos").addEventListener('change', changeValue, false);
-    document.getElementById("interestRate").innerHTML = document.getElementById("rangeInterest").value;
+    initializeData();
 
   }());
