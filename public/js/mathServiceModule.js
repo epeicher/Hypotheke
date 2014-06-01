@@ -1,12 +1,12 @@
 angular.module('mathServiceModule',[])
 .factory('hypoMath', function() {
 
-	var hypoMathInstance = {};
+	var my = {};
 
-	hypoMathInstance.calculateAmortizationTable = function (h) {
-	    var n = h.n,
-	     i = h.i,
-	     c = h.getCuota(),
+	my.calculateAmortizationTable = function (h) {
+	    var n = h.getAnnos(),
+	     i = h.getInterest(),
+	     c = my.calculateCuota(h),
 	     k = h.C,
 	     j = 0,
 	     kp = 0,
@@ -39,6 +39,10 @@ angular.module('mathServiceModule',[])
 	    return tabla;
 	}
 
+	my.calculateCuota = function (h) {
+		return (h.C * h.getInterest() / (1 - Math.pow(1 + h.getInterest(), -1 * h.getAnnos())));
+	}
+
 	function AddToTabla(h,j,k,i,kt,it) {
 	    h.push({
 	     periodo : j,
@@ -49,6 +53,6 @@ angular.module('mathServiceModule',[])
 	     })
 	}
 
-	return hypoMathInstance;
+	return my;
 
 });

@@ -3,14 +3,18 @@ angular.module('app',['mathServiceModule', 'charts'])
 .controller('HypoCtrl', ['$scope','hypoMath', 'chartsService', 
   function($scope, hypoMath, chartsService) {
 
-    console.log("Me he cargado App");
-
     $scope.hipoteca = {
-      n : 360,
-      i : 2 / 1200,
+      n : 30,
+      i : 2,
       C : 150000,
-      getCuota : function () {
-       return (this.C * this.i) / (1 - Math.pow(1 + this.i, -1 * this.n));
+      getAnnos: function() { return this.n * 12; },
+      getInterest: function() {return this.i / 1200;},
+      getCuota : function () { 
+        var c = hypoMath.calculateCuota(this);
+        return Math.round(c*100)/100;
+      },
+      tablaAmortizacion: function() { 
+        return hypoMath.calculateAmortizationTable(this);
       }
    };
 
@@ -21,60 +25,27 @@ angular.module('app',['mathServiceModule', 'charts'])
     }  
 
 	var initializeData = function () {
-	    var hipoteca = getHipotecaData();
-	    data = hypoMath.calculateAmortizationTable(hipoteca); 
-	    updateData(data,hipoteca); 
+	    changeValue();
    } 
 
-
-    var getHipotecaData = function () {
-      var interest = document.getElementById("rangeInterest").value;
-      var capital = document.getElementById("iCapital").value;
-      var periodos = document.getElementById("iPeriodos").value*12;
-      $scope.hipoteca.i = interest / 1200;
-      $scope.hipoteca.C = capital || $scope.hipoteca.C;
-      $scope.hipoteca.n = periodos || $scope.hipoteca.n;
-
-      return $scope.hipoteca;
-    }
-
-    function updateInterestRate(v){
-      document.getElementById("interestRate").innerHTML = document.getElementById("rangeInterest").value;
-    }
 
     function updateTotalInterestPaid(d) {
       var totalInterest = d.slice(-1).pop().interesTotal;
       document.getElementById("totalInterestPaid").innerHTML = Math.round(totalInterest*100)/100;      
     }
 
-    function updatePayment(h){
-      document.getElementById("cuota").innerHTML = Math.round(h.getCuota()*100)/100;
-    }
-
-    function updateCapital(h){
-      document.getElementById("iCapital").value = h.C;
-    }
-
-    function updatePeriods(h){
-      document.getElementById("iPeriodos").value = Math.round(h.n*100/12)/100;
-    }
-
-    var updateData = function (d,h) {
-          updateInterestRate();
-          updateTotalInterestPaid(d);
-          updatePayment(h);
-          updateCapital(h);
-          updatePeriods(h);
+    var updateData = function (d) {
+          updateTotalInterestPaid(d);        
 
           chartsService.updateCharts(d);
     }
 
     var changeValue = function () {
 
-      var hipoteca = getHipotecaData();
-      data = hypoMath.calculateAmortizationTable(hipoteca);  
+      var h = $scope.hipoteca;
+      data = hypoMath.calculateAmortizationTable(h);  
 
-      updateData(data,hipoteca);
+      updateData(data);
     }    
 
     setupBindings();

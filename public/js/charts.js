@@ -3,7 +3,7 @@ angular.module('charts',[])
 
   var chartsServiceInstance = {};
 
-   var data = {};//hypoMath.calculateAmortizationTable(myTempHypo);
+   var data = {};
 
    var margin = {top: 20, right: 30, bottom: 30, left: 70},
        browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
