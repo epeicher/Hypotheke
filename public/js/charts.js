@@ -1,11 +1,9 @@
-  (function () {
+angular.module('charts',[])
+.factory('chartsService',['hypoMath', function(hypoMath){
 
-   this.app = this.app || {};
-   var ns = this.app;
+  var chartsServiceInstance = {};
 
-   'use strict';
-
-   var hipoteca = ns.hipoteca;
+   var data = {};//hypoMath.calculateAmortizationTable(myTempHypo);
 
    var margin = {top: 20, right: 30, bottom: 30, left: 70},
        browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
@@ -63,12 +61,6 @@
     .attr("id","total")
     .attr("transform", "translate(" + ( +width/2 + 2*margin.right) + "," + margin.top + ")");
 
-    var data = MathService.calculateAmortizationTable(hipoteca);
-
-    x.domain(d3.extent(data, function(d) { return d.periodo; }));
-    y.domain([0,d3.max(data, function(d) { return Math.max(d.capitalPeriodo, d.interesPeriodo); })]);
-    yTotal.domain([0,d3.max(data, function(d) { return Math.max(d.capitalTotal, d.interesTotal); })]);
-
      svgPeriodo.append("g")
       .attr("id", "xAxis")
       .attr("class", "x axis")
@@ -96,7 +88,6 @@
       .attr("class", "y axis")
       .attr("id", "yAxisTotal")
       .call(yAxisTotal)
-
     .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
@@ -125,46 +116,7 @@
       .attr("class", "line4")
       .attr("d", lineInteresTotal);
 
-    function updateInterestRate(v){
-      document.getElementById("interestRate").innerHTML = document.getElementById("rangeInterest").value;
-    }
-
-    function updateTotalInterestPaid(d) {
-      var totalInterest = d.slice(-1).pop().interesTotal;
-      document.getElementById("totalInterestPaid").innerHTML = Math.round(totalInterest*100)/100;      
-    }
-
-    function updatePayment(h){
-      document.getElementById("cuota").innerHTML = Math.round(h.getCuota()*100)/100;
-    }
-
-    function updateCapital(h){
-      document.getElementById("iCapital").value = h.C;
-    }
-
-    function updatePeriods(h){
-      document.getElementById("iPeriodos").value = Math.round(h.n*100/12)/100;
-    }
-
-    ns.updateData = function (d,h) {
-          updateInterestRate();
-          updateTotalInterestPaid(d);
-          updatePayment(h);
-          updateCapital(h);
-          updatePeriods(h);
-
-          updateCharts(d);
-    }
-
-    ns.changeValue = function () {
-
-      var hipoteca = ns.getHipotecaData();
-      data = MathService.calculateAmortizationTable(hipoteca);  
-
-      ns.updateData(data,hipoteca);
-    }
-
-    function updateCharts(data) {
+    chartsServiceInstance.updateCharts = function (data) {
       x.domain(d3.extent(data, function(d) { return d.periodo; }));
       y.domain([0,d3.max(data, function(d) { return Math.max(d.capitalPeriodo, d.interesPeriodo); })]);
       yTotal.domain([0,d3.max(data, function(d) { return Math.max(d.capitalTotal, d.interesTotal); })]);
@@ -188,8 +140,9 @@
       d3.select(".line4")
        .datum(data)
        .attr("d",lineInteresTotal);
-    }
+    };
 
+    return chartsServiceInstance;
 
+}]);
 
-  }());

@@ -1,11 +1,9 @@
-(function () {
+angular.module('mathServiceModule',[])
+.factory('hypoMath', function() {
 
-	this.MathService = this.MathService || {};
-	var ns = this.MathService;
+	var hypoMathInstance = {};
 
-	'use strict';
-
-	ns.calculateAmortizationTable = function (h) {
+	hypoMathInstance.calculateAmortizationTable = function (h) {
 	    var n = h.n,
 	     i = h.i,
 	     c = h.getCuota(),
@@ -51,4 +49,6 @@
 	     })
 	}
 
-}());
+	return hypoMathInstance;
+
+});
