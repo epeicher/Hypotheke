@@ -22,19 +22,22 @@
           <div class="form-group">
             <label for="iCapital" class="col-sm-3 control-label">Capital</label>
             <div class="col-sm-4">
-              <input type="number" step="10000" class="form-control" id="iCapital" placeholder="Capital" ng-model="hipoteca.C" value="{{hipoteca.C}}" >            
+              <input type="number" step="10000" class="form-control" id="iCapital" placeholder="Capital" 
+                ng-model="hipoteca.C" value="{{hipoteca.C}}" ng-change="onChange()" >            
             </div>
           </div>
           <div class="form-group">
             <label for="iPeriodos" class="col-sm-3 control-label">Years</label>
             <div class="col-sm-4">
-              <input type="number" class="form-control" id="iPeriodos" placeholder="Numero de años" value="{{hipoteca.n}}" ng-model="hipoteca.n">
+              <input type="number" class="form-control" id="iPeriodos" placeholder="Numero de años" 
+                value="{{hipoteca.n}}" ng-model="hipoteca.n" ng-change="onChange()">
             </div>
           </div>
           <div class="form-group">
             <label for"rangeInterest" class="col-sm-3 control-label">Interest Rate: </label>     
             <div class="col-sm-3">      
-              <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" ng-model="hipoteca.i" value="{{hipoteca.i}}" step="0.1" class="rangeInterest" />
+              <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" ng-model="hipoteca.i" 
+                value="{{hipoteca.i}}" step="0.1" class="rangeInterest" ng-change="onChange()" />
             </div>
             <label id="interestRate" class="col-sm-1 control-label">{{hipoteca.i}}</label>
           </div>
@@ -48,18 +51,29 @@
           </div>          
         </form>
       </div>           
-    </div>    
-<!--     <div class="row">
-      <div class="col-md-12">
-        <ul>
-          <li ng-repeat="item in hipoteca.tablaAmortizacion()">
-            <span>{{item.capitalPeriodo}}</span>
-          </li>
-        </ul>
-      </div>
-    </div> -->
+    </div>   
+    <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Periodo</th>
+        <th>Capital Periodo</th>
+        <th>Interes Periodo</th>
+        <th>Interes Total</th>
+        <th>Capital Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in hipoteca.tablaAmortizacion()">
+        <td>{{item.periodo}}</td>
+        <td>{{item.capitalPeriodo}}</td>
+        <td>{{item.interesPeriodo}}</td>
+        <td>{{item.interesTotal}}</td>
+        <td>{{item.capitalTotal}}</td>
+      </tr>
+    </tbody>
+  </table>
   </div>
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
   <script src="js/mathServiceModule.js" charset="utf-8"></script>
   <script src="js/charts.js" charset="utf-8"></script>   

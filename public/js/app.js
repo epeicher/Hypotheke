@@ -1,5 +1,4 @@
 angular.module('app',['mathServiceModule', 'charts'])
-//.service('chartsService',function(){console.log("Me he cargado");})
 .controller('HypoCtrl', ['$scope','hypoMath', 'chartsService', 
   function($scope, hypoMath, chartsService) {
 
@@ -18,16 +17,9 @@ angular.module('app',['mathServiceModule', 'charts'])
       }
    };
 
-    function setupBindings() {
-    	document.getElementById("rangeInterest").addEventListener('change', changeValue, false);
-    	document.getElementById("iCapital").addEventListener('change', changeValue, false);
-    	document.getElementById("iPeriodos").addEventListener('change', changeValue, false);
-    }  
-
 	var initializeData = function () {
 	    changeValue();
    } 
-
 
     function updateTotalInterestPaid(d) {
       var totalInterest = d.slice(-1).pop().interesTotal;
@@ -46,9 +38,12 @@ angular.module('app',['mathServiceModule', 'charts'])
       data = hypoMath.calculateAmortizationTable(h);  
 
       updateData(data);
+    }
+
+    $scope.onChange = function() {
+      changeValue();
     }    
 
-    setupBindings();
     initializeData();
 
 }]);
