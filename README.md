@@ -8,3 +8,5 @@ of the mortgage.
 Just move the slider to see the differences in interest and capital depening on the interest rate.
 
 Use the tool accessing http://hypotheke.herokuapp.com
+
+Or by github pages http://epeicher.github.io/Hypotheke/public/Hypotheke.html
