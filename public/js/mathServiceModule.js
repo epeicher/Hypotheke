@@ -2,6 +2,7 @@ angular.module('mathServiceModule',[])
 .factory('hypoMath', function() {
 
 	var my = {};
+	var tabla = [];
 
 	my.calculateAmortizationTable = function (h) {
 	    var n = h.getAnnos(),
@@ -13,8 +14,9 @@ angular.module('mathServiceModule',[])
 	     ip = 0,
 	     kt = 0,
 	     it = 0,
-	     d = 0,
-	     tabla = [];
+	     d = 0;
+
+		tabla.splice(0,tabla.length)
 
 	    while (n > 0) {
 	     n -= 1;

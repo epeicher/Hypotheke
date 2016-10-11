@@ -11,9 +11,6 @@ angular.module('app',['mathServiceModule', 'charts'])
       getCuota : function () { 
         var c = hypoMath.calculateCuota(this);
         return Math.round(c*100)/100;
-      },
-      tablaAmortizacion: function() { 
-        return hypoMath.calculateAmortizationTable(this);
       }
    };
 
@@ -34,8 +31,8 @@ angular.module('app',['mathServiceModule', 'charts'])
 
     var changeValue = function () {
 
-      var h = $scope.hipoteca;
-      data = hypoMath.calculateAmortizationTable(h);  
+      data = hypoMath.calculateAmortizationTable($scope.hipoteca);  
+	  $scope.hipoteca.tablaAmortizacion = data;
 
       updateData(data);
     }
