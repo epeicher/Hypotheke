@@ -38,26 +38,10 @@ class App extends Component {
     }
   }
 
-  updateCapital(v) {
+  updateHypotheke(property,{target : {value: v}}) {
     let st = Object.assign(
       this.state,
-      {C: v.target.value}
-    )
-    this.updateState(st);
-  }
-
-  updateInteres(v) {
-    let st = Object.assign(
-      this.state,
-      {i: v.target.value}
-    )
-    this.updateState(st);
-  }
-
-  updateAgnos(v) {
-    let st = Object.assign(
-      this.state,
-      {n: v.target.value}
+      {[property]: v}
     )
     this.updateState(st);
   }
@@ -72,9 +56,9 @@ class App extends Component {
       <div className="container-fluid">
         <HipoForm cuota={this.state.cuota} interes={this.state.i} capital={this.state.C}
           agnos={this.state.n} interesTotal={this.getInteresTotal()} 
-          onChangeCapital={this.updateCapital.bind(this)}
-          onChangeAgnos={this.updateAgnos.bind(this)} 
-          onChangeInteres={this.updateInteres.bind(this)} />
+          onChangeCapital={this.updateHypotheke.bind(this, "C")}
+          onChangeAgnos={this.updateHypotheke.bind(this, "n")} 
+          onChangeInteres={this.updateHypotheke.bind(this, "i")} />
         <AmortizationTable tablaAmortizacion={this.state.tablaAmortizacion} />
       </div>
     );
