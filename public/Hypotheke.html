@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for"rangeInterest" class="col-sm-3 control-label">Interest Rate: </label>     
+            <label for="rangeInterest" class="col-sm-3 control-label">Interest Rate: </label>     
             <div class="col-sm-3">      
               <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" ng-model="hipoteca.i" 
                 value="{{hipoteca.i}}" step="0.1" class="rangeInterest" ng-change="onChange()" />
@@ -42,11 +42,11 @@
             <label id="interestRate" class="col-sm-1 control-label">{{hipoteca.i}}</label>
           </div>
           <div class="form-group">
-            <label for"totalInterestPaid" class="col-sm-3 control-label">Total Interests paid:</label>                
+            <label for="totalInterestPaid" class="col-sm-3 control-label">Total Interests paid:</label>                
               <label id="totalInterestPaid" class="col-sm-4 control-label"></label>            
           </div>
           <div class="form-group">
-            <label for"cuota" class="col-sm-3 control-label">Payment:</label>                
+            <label for="cuota" class="col-sm-3 control-label">Payment:</label>                
               <label id="cuota" class="col-sm-4 control-label">{{hipoteca.getCuota()}}</label>            
           </div>          
         </form>

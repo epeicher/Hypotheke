@@ -1,52 +1,58 @@
-export default {
 
-	calculateAmortizationTable : function (h) {
-	    var n = h.getAnnos(),
-	     i = h.getInterest(),
-	     c = this.calculateCuota(h),
-	     k = h.C,
-	     j = 0,
-	     kp = 0,
-	     ip = 0,
-	     kt = 0,
-	     it = 0,
-	     d = 0,
-		 tabla = [];
+function calculateAmortizationTable(h) {
+    let n = getAnnos(h)
+    let	i = getInterest(h)
+    let	c = calculateCuota(h)
+    let	k = h.C
+    let [j, kp, ip, kt, it, d] = [0, 0, 0, 0, 0, 0];
+    let tabla = [];
 
-	    while (n > 0) {
-	     n -= 1;
-	     j += 1;
+    while (n > 0) {
+        n -= 1;
+        j += 1;
 
-	     if (n > 0)
-	     {
-	      kp = c - i * k;
-	      ip = i * k;
-	      kt += kp;
-	      it += ip;
-	      d = (1 + i) * k - c;
-	      AddToTabla(tabla, j, kp, ip, kt, it);
-	     }
-	     else
-	     {
-	      AddToTabla(tabla, j, k, i * k, kt, it);
-	     }
-	     k = d;
-	    }
-
-	    return tabla;
-	},
-
-	calculateCuota : function (h) {
-		return (h.C * h.getInterest() / (1 - Math.pow(1 + h.getInterest(), -1 * h.getAnnos())));
-	}
+        if (n > 0)
+        {
+            kp = c - i * k;
+            ip = i * k;
+            kt += kp;
+            it += ip;
+            d = (1 + i) * k - c;
+            AddToTabla(tabla, j, kp, ip, kt, it);
+        }
+        else
+        {
+            AddToTabla(tabla, j, k, i * k, kt, it);
+        }
+        k = d;
+    }
+    return tabla;
 }
 
+function calculateCuota(h) {
+    return (h.C * getInterest(h) / (1 - Math.pow(1 + getInterest(h), -1 * getAnnos(h))));
+}
+
+function getInterest(h) {
+    return h.i / 1200;
+}
+
+function getAnnos(h) {
+    return h.n * 12;
+}
+
+
 function AddToTabla(h,j,k,i,kt,it) {
-	h.push({
-		periodo : j,
-		capitalPeriodo : k,
-		interesPeriodo : i,
-		capitalTotal: kt,
-		interesTotal: it
-		})
+    h.push({
+        periodo : j,
+        capitalPeriodo : k,
+        interesPeriodo : i,
+        capitalTotal: kt,
+        interesTotal: it
+    })
+}
+
+export {
+    calculateAmortizationTable,
+    calculateCuota
 }

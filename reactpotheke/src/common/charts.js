@@ -1,9 +1,5 @@
 import * as d3 from "d3";
 
-export default function() {
-
-  var chartsServiceInstance = {};
-
    var data = {};
 
    var margin = {top: 20, right: 30, bottom: 30, left: 70},
@@ -117,33 +113,28 @@ export default function() {
       .attr("class", "line4")
       .attr("d", lineInteresTotal);
 
-    chartsServiceInstance.updateCharts = function (data) {
-      x.domain(d3.extent(data, function(d) { return d.periodo; }));
-      y.domain([0,d3.max(data, function(d) { return Math.max(d.capitalPeriodo, d.interesPeriodo); })]);
-      yTotal.domain([0,d3.max(data, function(d) { return Math.max(d.capitalTotal, d.interesTotal); })]);
+export default function updateCharts (data) {
+    x.domain(d3.extent(data, function(d) { return d.periodo; }));
+    y.domain([0,d3.max(data, function(d) { return Math.max(d.capitalPeriodo, d.interesPeriodo); })]);
+    yTotal.domain([0,d3.max(data, function(d) { return Math.max(d.capitalTotal, d.interesTotal); })]);
 
-      d3.select("#xAxis").call(xAxis);
-      d3.select("#xAxisTotal").call(xAxis);
-      d3.select("#yAxis").call(yAxis);
-      d3.select("#yAxisTotal").call(yAxisTotal);
+    d3.select("#xAxis").call(xAxis);
+    d3.select("#xAxisTotal").call(xAxis);
+    d3.select("#yAxis").call(yAxis);
+    d3.select("#yAxisTotal").call(yAxisTotal);
 
-      d3.select(".line")
-       .datum(data)
-       .attr("d",lineCapital);
+    d3.select(".line")
+      .datum(data)
+      .attr("d",lineCapital);
 
-      d3.select(".line2")
-       .datum(data)
-       .attr("d",lineInteres);
+    d3.select(".line2")
+      .datum(data)
+      .attr("d",lineInteres);
 
-      d3.select(".line3")
-       .datum(data)
-       .attr("d",lineCapitalTotal);
-      d3.select(".line4")
-       .datum(data)
-       .attr("d",lineInteresTotal);
-    };
-
-    return chartsServiceInstance;
-
-}
-
+    d3.select(".line3")
+      .datum(data)
+      .attr("d",lineCapitalTotal);
+    d3.select(".line4")
+      .datum(data)
+      .attr("d",lineInteresTotal);
+};

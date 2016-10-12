@@ -6,8 +6,10 @@
     "react-scripts": "0.6.1"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "d3": "^3.5.17",
     "react": "^15.3.2",
+    "react-bootstrap": "^0.30.5",
     "react-dom": "^15.3.2"
   },
   "scripts": {
