@@ -1,9 +1,12 @@
 {
   "name": "angular-quickstart",
   "version": "1.0.0",
+   "engines": {
+    "node": "4.6.0"
+  },
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
-    "lite": "lite-server",
+    "lite": "lite-server -c my-bs-config.js",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
