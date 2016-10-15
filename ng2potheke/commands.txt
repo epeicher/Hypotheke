@@ -1,0 +1,2 @@
+git push heroku `git subtree split --prefix ng2potheke master`:master --force
+git subtree push --prefix ng2potheke heroku master
