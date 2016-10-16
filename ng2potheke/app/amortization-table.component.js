@@ -11,35 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var AmortizationTable = (function () {
     function AmortizationTable() {
-        this.tablaAmortizacion = [{
-                periodo: 1,
-                capitalPeriodo: 200,
-                interesPeriodo: 300,
-                interesTotal: 200,
-                capitalTotal: 300
-            },
-            {
-                periodo: 2,
-                capitalPeriodo: 210,
-                interesPeriodo: 290,
-                interesTotal: 490,
-                capitalTotal: 510
-            }];
     }
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], AmortizationTable.prototype, "tablaAmortizacion", void 0);
     AmortizationTable = __decorate([
         core_1.Component({
             selector: 'amortization-table',
-            templateUrl: './amortizationTable.html'
+            templateUrl: './app/amortizationTable.html'
         }), 
         __metadata('design:paramtypes', [])
     ], AmortizationTable);
     return AmortizationTable;
 }());
 exports.AmortizationTable = AmortizationTable;
-var ItemHipoteca = (function () {
-    function ItemHipoteca() {
-    }
-    return ItemHipoteca;
-}());
-exports.ItemHipoteca = ItemHipoteca;
 //# sourceMappingURL=amortization-table.component.js.map

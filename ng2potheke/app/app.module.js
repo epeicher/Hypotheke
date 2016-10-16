@@ -12,13 +12,14 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
 var amortization_table_component_1 = require('./amortization-table.component');
+var hypo_form_component_1 = require('./hypo-form.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent, amortization_table_component_1.AmortizationTable],
+            declarations: [app_component_1.AppComponent, amortization_table_component_1.AmortizationTable, hypo_form_component_1.HypoForm],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
