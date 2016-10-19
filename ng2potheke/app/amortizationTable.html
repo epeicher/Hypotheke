@@ -10,11 +10,11 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of tablaAmortizacion">
-            <td>{{item.periodo}}</td>
-            <td>{{item.capitalPeriodo}}</td>
-            <td>{{item.interesPeriodo}}</td>
-            <td>{{item.interesTotal}}</td>
-            <td>{{item.capitalTotal}}</td>
+            <td>{{item.periodo | number}}</td>
+            <td>{{item.capitalPeriodo | number}}</td>
+            <td>{{item.interesPeriodo | number}}</td>
+            <td>{{item.interesTotal | number}}</td>
+            <td>{{item.capitalTotal | number}}</td>
         </tr>
     </tbody>
 </table>

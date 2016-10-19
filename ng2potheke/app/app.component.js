@@ -21,27 +21,31 @@ var AppComponent = (function () {
         this.updateTabla();
     };
     AppComponent.prototype.updateTabla = function () {
-        this.hipoteca.tablaAmortizacion = this.mathService.calculateAmortizationTable(this.hipoteca);
-        this.chartService.updateCharts(this.hipoteca.tablaAmortizacion);
+        this.hipoteca.cuota = this.mathService.calculateCuota(this.hipoteca);
+        var tblAmort = this.mathService.calculateAmortizationTable(this.hipoteca);
+        this.hipoteca.tablaAmortizacion = tblAmort;
+        this.hipoteca.totalInteres = tblAmort[tblAmort.length - 1].interesTotal;
+        this.chartService.updateCharts(tblAmort);
     };
     AppComponent.prototype.onChange = function (prop, e) {
         this.hipoteca[prop] = e;
-        console.log('changed', prop);
-        console.log(this.hipoteca[prop]);
         this.updateTabla();
     };
     AppComponent.prototype.getInitialHipoteca = function () {
-        return {
+        var h = {
             capital: 200000,
             agnos: 40,
             interes: 2.5,
+            cuota: 0,
             tablaAmortizacion: []
         };
+        h.cuota = this.mathService.calculateCuota(h);
+        return h;
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "<h1>My First Angular App</h1>\n            <hypo-form [hipoteca]=\"hipoteca\"\n              (onChangeCapital)=\"onChange('capital',$event)\"\n              (onChangeAgnos)=\"onChange('agnos',$event)\"\n              (onChangeInteres)=\"onChange('interes',$event)\"></hypo-form>\n            <amortization-table [tablaAmortizacion]=hipoteca.tablaAmortizacion></amortization-table>",
+            template: "<h1>Datos de la Hipoteca</h1>\n            <hypo-form [hipoteca]=\"hipoteca\"\n              (onChangeCapital)=\"onChange('capital',$event)\"\n              (onChangeAgnos)=\"onChange('agnos',$event)\"\n              (onChangeInteres)=\"onChange('interes',$event)\"></hypo-form>\n            <amortization-table [tablaAmortizacion]=hipoteca.tablaAmortizacion></amortization-table>",
             providers: [chart_service_1.ChartService, math_service_1.MathService]
         }), 
         __metadata('design:paramtypes', [chart_service_1.ChartService, math_service_1.MathService])

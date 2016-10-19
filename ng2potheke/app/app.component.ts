@@ -6,7 +6,7 @@ import { MathService } from './Services/math.service'
 
 @Component({
   selector: 'my-app',
-  template: `<h1>My First Angular App</h1>
+  template: `<h1>Datos de la Hipoteca</h1>
             <hypo-form [hipoteca]="hipoteca"
               (onChangeCapital)="onChange('capital',$event)"
               (onChangeAgnos)="onChange('agnos',$event)"
@@ -29,8 +29,11 @@ export class AppComponent implements OnInit {
   }
 
   updateTabla() {
-    this.hipoteca.tablaAmortizacion = this.mathService.calculateAmortizationTable(this.hipoteca);
-    this.chartService.updateCharts(this.hipoteca.tablaAmortizacion);
+    this.hipoteca.cuota = this.mathService.calculateCuota(this.hipoteca);
+    let tblAmort = this.mathService.calculateAmortizationTable(this.hipoteca);
+    this.hipoteca.tablaAmortizacion = tblAmort;
+    this.hipoteca.totalInteres = tblAmort[tblAmort.length - 1].interesTotal;
+    this.chartService.updateCharts(tblAmort);
   }
 
   onChange(prop, e) {
@@ -39,12 +42,15 @@ export class AppComponent implements OnInit {
   }
 
   getInitialHipoteca() : Hipoteca {
-    return {
+    var h = {
       capital: 200000,
       agnos: 40,
       interes: 2.5,
+      cuota: 0,
       tablaAmortizacion: []
     }
+    h.cuota = this.mathService.calculateCuota(h);
+    return h;
   }
 
 }

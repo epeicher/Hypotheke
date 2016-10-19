@@ -26,11 +26,11 @@ const template = `
           </div>
           <div class="form-group">
             <label for="totalInterestPaid" class="col-sm-3 control-label">Total Interests paid:</label>                
-              <label id="totalInterestPaid" class="col-sm-4 control-label"></label>            
+              <label id="totalInterestPaid" class="col-sm-4 control-label">{{hipoteca.totalInteres | number:'.0-2'}}</label>            
           </div>
           <div class="form-group">
             <label for="cuota" class="col-sm-3 control-label">Payment:</label>                
-              <label id="cuota" class="col-sm-4 control-label">{{hipoteca.capital}}</label>            
+              <label id="cuota" class="col-sm-4 control-label">{{hipoteca.cuota | number:'.0-2'}}</label>            
           </div>          
         </form>
       </div>           
@@ -46,6 +46,8 @@ import Hipoteca from './Models/Hipoteca'
   template: template
 })
 export class HypoForm {
+
+    cuota
 
     @Input()
     hipoteca: Hipoteca;

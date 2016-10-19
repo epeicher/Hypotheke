@@ -2,6 +2,8 @@ export default class Hipoteca {
     capital: number;
     agnos: number;
     interes: number;
+    cuota: number;
+    totalInteres: number;
     tablaAmortizacion: ItemHipoteca[];
 }
 
