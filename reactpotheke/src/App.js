@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import updateCharts from './common/charts';
-import * as hypoMath from './common/mathServiceModule';
+import updateCharts from './services/charts';
+import * as hypoMath from './services/mathServiceModule';
 import AmortizationTable from './AmortizationTable'
 import HipoForm from './HipoForm'
+import validate from './services/validate'
 
 
 class App extends Component {
@@ -20,12 +21,13 @@ class App extends Component {
 
   updateState(newSt) {
     let data = hypoMath.calculateAmortizationTable(newSt);
+    let cuota = data.length === 0 ? 0 : hypoMath.calculateCuota(newSt);
     updateCharts(data);
     this.setState(Object.assign(
       newSt,
       {
         tablaAmortizacion : data,
-        cuota: Math.round(hypoMath.calculateCuota(newSt)*100)/100
+        cuota
       }
     ));
   }
@@ -39,16 +41,18 @@ class App extends Component {
   }
 
   updateHypotheke(property,{target : {value: v}}) {
-    let st = Object.assign(
-      this.state,
-      {[property]: v}
-    )
-    this.updateState(st);
+    if(validate(property,v)) {
+      let st = Object.assign(
+        this.state,
+        {[property]: v}
+      )
+      this.updateState(st);
+    }
   }
 
   getInteresTotal() {
     let t = this.state.tablaAmortizacion;
-    return Math.round(t[t.length-1].interesTotal*100/100);
+    return t[t.length-1].interesTotal;
   }
 
   render() {

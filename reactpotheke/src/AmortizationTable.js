@@ -1,4 +1,5 @@
 import React from 'react'
+import formatNum from './services/formatter'
 
 const AmortizationTable = (props) => (
     <table className="table table-condensed table-striped">
@@ -15,10 +16,10 @@ const AmortizationTable = (props) => (
         {props.tablaAmortizacion.map(item => (
             <tr key={item.periodo}>
                 <td>{item.periodo}</td>
-                <td>{item.capitalPeriodo}</td>
-                <td>{item.interesPeriodo}</td>
-                <td>{item.interesTotal}</td>
-                <td>{item.capitalTotal}</td>
+                <td>{formatNum(item.capitalPeriodo)}</td>
+                <td>{formatNum(item.interesPeriodo)}</td>
+                <td>{formatNum(item.interesTotal)}</td>
+                <td>{formatNum(item.capitalTotal)}</td>
             </tr>
         ))}
         </tbody>

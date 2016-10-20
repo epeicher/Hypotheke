@@ -1,4 +1,5 @@
 import React from 'react'
+import formatNum from './services/formatter'
 
 export default (props) => {
     let {cuota, agnos, capital, interes, interesTotal, onChangeCapital, onChangeAgnos, onChangeInteres} = props;
@@ -10,14 +11,14 @@ export default (props) => {
             <label htmlFor="iCapital" className="col-sm-3 control-label">Capital</label>
             <div className="col-sm-4">
               <input type="number" step="10000" className="form-control" id="iCapital" placeholder="Capital" 
-                value={capital} onChange={onChangeCapital} />            
+                value={capital} onChange={onChangeCapital} min="1" max="1000000000" />            
             </div>
           </div>
           <div className="form-group">
             <label htmlFor="iPeriodos" className="col-sm-3 control-label">Years</label>
             <div className="col-sm-4">
               <input type="number" className="form-control" id="iPeriodos" placeholder="Numero de años" 
-                value={agnos} onChange={onChangeAgnos} />
+                value={agnos} onChange={onChangeAgnos} min="1" max="100" />
             </div>
           </div>
           <div className="form-group">
@@ -30,11 +31,11 @@ export default (props) => {
           </div>
           <div className="form-group">
             <label htmlFor="totalInterestPaid" className="col-sm-3 control-label">Total Interests paid:</label>                
-              <label id="totalInterestPaid" className="col-sm-4 control-label">{interesTotal}</label>            
+              <label id="totalInterestPaid" className="col-sm-4 control-label">{formatNum(interesTotal)}</label>            
           </div>
           <div className="form-group">
             <label htmlFor="cuota" className="col-sm-3 control-label">Payment:</label>                
-              <label id="cuota" className="col-sm-4 control-label">{cuota}</label>            
+              <label id="cuota" className="col-sm-4 control-label">{formatNum(cuota)}</label>            
           </div>          
         </form>
       </div>           
