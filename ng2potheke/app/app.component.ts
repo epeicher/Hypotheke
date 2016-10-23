@@ -6,12 +6,14 @@ import { MathService } from './Services/math.service'
 
 @Component({
   selector: 'my-app',
-  template: `<h1>Datos de la Hipoteca</h1>
-            <hypo-form [hipoteca]="hipoteca"
-              (onChangeCapital)="onChange('capital',$event)"
-              (onChangeAgnos)="onChange('agnos',$event)"
-              (onChangeInteres)="onChange('interes',$event)"></hypo-form>
-            <amortization-table [tablaAmortizacion]=hipoteca.tablaAmortizacion></amortization-table>`,
+  template: `<div class="container-fluid">
+              <h1>Datos de la Hipoteca</h1>
+              <hypo-form [hipoteca]="hipoteca"
+                (onChangeCapital)="onChange('capital',$event)"
+                (onChangeAgnos)="onChange('agnos',$event)"
+                (onChangeInteres)="onChange('interes',$event)"></hypo-form>
+              <amortization-table [tablaAmortizacion]=hipoteca.tablaAmortizacion></amortization-table>
+             </div>`,
   providers: [ChartService, MathService]
 })
 export class AppComponent implements OnInit { 
@@ -47,6 +49,7 @@ export class AppComponent implements OnInit {
       agnos: 40,
       interes: 2.5,
       cuota: 0,
+      totalInteres: 0,
       tablaAmortizacion: []
     }
     h.cuota = this.mathService.calculateCuota(h);

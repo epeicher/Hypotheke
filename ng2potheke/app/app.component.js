@@ -37,6 +37,7 @@ var AppComponent = (function () {
             agnos: 40,
             interes: 2.5,
             cuota: 0,
+            totalInteres: 0,
             tablaAmortizacion: []
         };
         h.cuota = this.mathService.calculateCuota(h);
@@ -45,7 +46,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "<h1>Datos de la Hipoteca</h1>\n            <hypo-form [hipoteca]=\"hipoteca\"\n              (onChangeCapital)=\"onChange('capital',$event)\"\n              (onChangeAgnos)=\"onChange('agnos',$event)\"\n              (onChangeInteres)=\"onChange('interes',$event)\"></hypo-form>\n            <amortization-table [tablaAmortizacion]=hipoteca.tablaAmortizacion></amortization-table>",
+            template: "<div class=\"container-fluid\">\n              <h1>Datos de la Hipoteca</h1>\n              <hypo-form [hipoteca]=\"hipoteca\"\n                (onChangeCapital)=\"onChange('capital',$event)\"\n                (onChangeAgnos)=\"onChange('agnos',$event)\"\n                (onChangeInteres)=\"onChange('interes',$event)\"></hypo-form>\n              <amortization-table [tablaAmortizacion]=hipoteca.tablaAmortizacion></amortization-table>\n             </div>",
             providers: [chart_service_1.ChartService, math_service_1.MathService]
         }), 
         __metadata('design:paramtypes', [chart_service_1.ChartService, math_service_1.MathService])

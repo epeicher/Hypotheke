@@ -1,7 +1,7 @@
 export default function validate(prop, value) {
     switch(prop) {
         case 'n':
-            if(1 > value || value > 100) {
+            if((0 > value || value > 100)) {
                 return false;
             }             
         break;

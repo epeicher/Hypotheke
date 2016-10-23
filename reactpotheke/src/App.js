@@ -23,13 +23,11 @@ class App extends Component {
     let data = hypoMath.calculateAmortizationTable(newSt);
     let cuota = data.length === 0 ? 0 : hypoMath.calculateCuota(newSt);
     updateCharts(data);
-    this.setState(Object.assign(
-      newSt,
-      {
+    this.setState(
+      { ...newSt,
         tablaAmortizacion : data,
         cuota
-      }
-    ));
+      });
   }
 
   getMyInitialState() {
@@ -41,23 +39,25 @@ class App extends Component {
   }
 
   updateHypotheke(property,{target : {value: v}}) {
-    if(validate(property,v)) {
-      let st = Object.assign(
-        this.state,
-        {[property]: v}
-      )
-      this.updateState(st);
+    let st = {};
+    if(!v) {
+      st = { ...this.state, [property]:0 }
+    } else if(validate(property,v)) {
+      st = {...this.state, [property]: v }
     }
+    this.updateState(st);
   }
 
   getInteresTotal() {
     let t = this.state.tablaAmortizacion;
+    if(t.length === 0) return 0;
     return t[t.length-1].interesTotal;
   }
 
   render() {
     return (
       <div className="container-fluid">
+        <h1>Datos de la Hipoteca</h1>
         <HipoForm cuota={this.state.cuota} interes={this.state.i} capital={this.state.C}
           agnos={this.state.n} interesTotal={this.getInteresTotal()} 
           onChangeCapital={this.updateHypotheke.bind(this, "C")}
