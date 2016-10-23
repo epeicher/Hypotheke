@@ -10,13 +10,17 @@ class App extends Component {
 
   constructor() {
     super();
-    this.state = this.getMyInitialState();
-    let data = hypoMath.calculateAmortizationTable(this.state);
+    let initState = {
+      n : 30,
+      i : 2,
+      C : 150000
+    }
+    let data = hypoMath.calculateAmortizationTable(initState);
+    this.state = {
+      ...initState,
+      tablaAmortizacion: data
+    }
     updateCharts(data);
-  }
-
-  componentWillMount() {
-    this.updateState(this.state)
   }
 
   updateState(newSt) {
@@ -28,14 +32,6 @@ class App extends Component {
         tablaAmortizacion : data,
         cuota
       });
-  }
-
-  getMyInitialState() {
-    return {
-      n : 30,
-      i : 2,
-      C : 150000
-    }
   }
 
   updateHypotheke(property,{target : {value: v}}) {
@@ -63,7 +59,8 @@ class App extends Component {
           onChangeCapital={this.updateHypotheke.bind(this, "C")}
           onChangeAgnos={this.updateHypotheke.bind(this, "n")} 
           onChangeInteres={this.updateHypotheke.bind(this, "i")} />
-        <AmortizationTable tablaAmortizacion={this.state.tablaAmortizacion} />
+        <AmortizationTable tablaAmortizacion={this.state.tablaAmortizacion} 
+          editItem={(e)=> console.log(e)} />
       </div>
     );
   }
