@@ -18,7 +18,7 @@ export default (props) => {
             <label htmlFor="iPeriodos" className="col-sm-3 control-label">Years</label>
             <div className="col-sm-4">
               <input type="number" className="form-control" id="iPeriodos" placeholder="Numero de años" 
-                value={agnos} onChange={onChangeAgnos} min="1" max="100" />
+                value={agnos} step="0.1" onChange={onChangeAgnos} min="1" max="100" />
             </div>
           </div>
           <div className="form-group">

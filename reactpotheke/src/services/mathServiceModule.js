@@ -18,11 +18,11 @@ function calculateAmortizationTable(h) {
             kt += kp;
             it += ip;
             d = (1 + i) * k - c;
-            AddToTabla(tabla, j, kp, ip, kt, d, it);
+            AddToTabla(tabla, j, h.i, c, kp, ip, kt, d, it);
         }
         else
         {
-            AddToTabla(tabla, j, k, i * k, kt+k, k-d, it+i*k);
+            AddToTabla(tabla, j, h.i, k + i*k, k, i * k, kt+k, k-d, it+i*k);
         }
         k = d;
     }
@@ -42,9 +42,11 @@ function getAnnos(h) {
 }
 
 
-function AddToTabla(h,j,k,i,kt,kd,it) {
+function AddToTabla(h,j,interes,c,k,i,kt,kd,it) {
     h.push({
         periodo : j,
+        interes: interes,
+        cuota: c,
         capitalPeriodo : k,
         interesPeriodo : i,
         capitalTotal: kt,

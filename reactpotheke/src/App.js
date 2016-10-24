@@ -50,6 +50,26 @@ class App extends Component {
     return t[t.length-1].interesTotal;
   }
 
+  updateTable(periodo,remainingCapital) {
+    let remainingAgnos = this.state.n - periodo/12;
+
+
+    let initState = {
+      n : remainingAgnos,
+      i : this.state.i,
+      C : remainingCapital
+    }
+    let restTable = hypoMath.calculateAmortizationTable(initState);
+    let newPeriodos = restTable.map(r => { return {...r, periodo:r.periodo+periodo}});
+    let initTablaAmort = this.state.tablaAmortizacion.slice(0,periodo);
+    initTablaAmort[initTablaAmort.length-1].capitalPendiente = remainingCapital;
+    let finalTable = [...initTablaAmort,...newPeriodos];
+    updateCharts(finalTable);
+    let newSt = {...this.state, tablaAmortizacion:finalTable, editPeriod:-1}
+
+    this.setState(newSt);
+  }
+
   render() {
     return (
       <div className="container-fluid">
@@ -60,7 +80,9 @@ class App extends Component {
           onChangeAgnos={this.updateHypotheke.bind(this, "n")} 
           onChangeInteres={this.updateHypotheke.bind(this, "i")} />
         <AmortizationTable tablaAmortizacion={this.state.tablaAmortizacion} 
-          editItem={(e)=> console.log(e)} />
+           updateTable={(e,v)=> this.updateTable(e,v)}
+           updateRow={p => this.setState({...this.state, editPeriod:p})}
+           editPeriod={this.state.editPeriod} />
       </div>
     );
   }
