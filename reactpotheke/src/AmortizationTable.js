@@ -9,26 +9,19 @@ const styles = {
 
 class AmortizationTable extends Component {
 
-    constructor() {
-        super();
-        this.state = {capital:null}
-    }
-
     capitalRow(row, item) {
-        if(row !== item.periodo) return (<td>{formatNum(item.capitalPendiente)}</td>);
+        if(row !== item.periodo) {            
+            return (<td
+                onDoubleClick={(e) => this.props.updateRow(item.periodo)}>
+                {formatNum(item.capitalPendiente)}</td>);
+        }
 
-        return (<td><input value={this.state.capital || item.capitalPendiente} 
-                onChange={e => this.setState({capital:e.target.value})}
-                onBlur={e => this.rowUpdated(row, e.target.value)} /></td>)
-    }
-
-    rowUpdated(row,value){
-        this.state = {capital:null};
-        this.props.updateTable(row, value);
+        return (<td><input defaultValue={item.capitalPendiente} 
+                onBlur={(e) => this.props.updateTable(row, e.target.value)} /></td>)
     }
 
     render() {
-        let {tablaAmortizacion, editPeriod, updateRow} = this.props;
+        let {tablaAmortizacion, editPeriod} = this.props;
 
         return (
             <table className="table table-condensed table-striped">
@@ -55,7 +48,7 @@ class AmortizationTable extends Component {
                         <td>{formatNum(item.interesTotal)}</td>
                         <td>{formatNum(item.capitalTotal)}</td>
                         {this.capitalRow(editPeriod,item)}
-                        <td><button onClick={(e) => updateRow(item.periodo)}>Edit</button></td>
+                        
                     </tr>
                 ))}
                 </tbody>
