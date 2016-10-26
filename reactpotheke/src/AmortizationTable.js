@@ -9,6 +9,11 @@ const styles = {
 
 class AmortizationTable extends Component {
 
+    constructor() {
+        super();
+        this.hypos = [];
+    }
+
     capitalRow(row, item) {
         if(row !== item.periodo) {            
             return (<td
@@ -20,10 +25,17 @@ class AmortizationTable extends Component {
                 onBlur={(e) => this.props.updateTable(row, e.target.value)} /></td>)
     }
 
+    saveHypo() {
+        this.hypos.push(this.props.tablaAmortizacion);
+        console.log(this.hypos)
+    }
+
     render() {
         let {tablaAmortizacion, editPeriod} = this.props;
 
         return (
+            <div>
+            <button onClick={this.saveHypo.bind(this)}>Save it for later comparison</button>
             <table className="table table-condensed table-striped">
                 <thead>
                 <tr>
@@ -53,6 +65,7 @@ class AmortizationTable extends Component {
                 ))}
                 </tbody>
             </table>
+            </div>
         )
     }
 }
