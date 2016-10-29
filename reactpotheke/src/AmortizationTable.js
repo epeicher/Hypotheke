@@ -22,12 +22,18 @@ class AmortizationTable extends Component {
         }
 
         return (<td><input defaultValue={item.capitalPendiente} 
-                onBlur={(e) => this.props.updateTable(row, e.target.value)} /></td>)
+                onBlur={(e) => this.props.updateTable(row, e.target.value)}
+                onKeyPress={e => e.charCode === 13 ? this.props.updateTable(row, e.target.value):null} /></td>)
     }
 
     saveHypo() {
         this.hypos.push(this.props.tablaAmortizacion);
-        console.log(this.hypos)
+    }
+
+    compareHypo() {
+        if(this.hypos.length === 0) return;
+        let compareTo = this.hypos[0];
+        this.props.onCompare(compareTo, this.props.tablaAmortizacion);
     }
 
     render() {
@@ -36,6 +42,7 @@ class AmortizationTable extends Component {
         return (
             <div>
             <button onClick={this.saveHypo.bind(this)}>Save it for later comparison</button>
+            <button onClick={this.compareHypo.bind(this)}>COMPARE</button>
             <table className="table table-condensed table-striped">
                 <thead>
                 <tr>
