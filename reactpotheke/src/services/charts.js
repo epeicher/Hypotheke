@@ -2,13 +2,13 @@ import * as d3 from "d3";
 
    var data = {};
 
-   var margin = {top: 20, right: 30, bottom: 30, left: 70},
+   var margin = {top: 20, right: 60, bottom: 30, left: 60},
        browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
        width = browserWidth - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
 
    var x = d3.scale.linear()
-    .range([0, (width-2*margin.right-margin.left)/2]);
+    .range([0, (width-margin.left-margin.right)/2]);
 
    var y = d3.scale.linear()
     .range([height, 0]);
@@ -46,8 +46,9 @@ import * as d3 from "d3";
 
    var globalSvg = d3.select("#containerSvg")   
     .append("svg")
-    .attr("width", width+margin.right)
-    .attr("height", height + margin.top + margin.bottom);
+    .attr("width", width+margin.right+margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+    .call(responsivefy);
 
    var svgPeriodo = globalSvg
     .append("g")
@@ -56,7 +57,7 @@ import * as d3 from "d3";
    var svgAcumulado = globalSvg
     .append("g")
     .attr("id","total")
-    .attr("transform", "translate(" + ( +width/2 + 2*margin.right) + "," + margin.top + ")");
+    .attr("transform", "translate(" + ( width/2 + margin.left + margin.right) + "," + margin.top + ")");
 
      svgPeriodo.append("g")
       .attr("id", "xAxis")
@@ -114,9 +115,9 @@ import * as d3 from "d3";
       .attr("d", lineInteresTotal);
 
 export default function updateCharts (data) {
-    x.domain(d3.extent(data, function(d) { return d.periodo; }));
-    y.domain([0,d3.max(data, function(d) { return Math.max(d.capitalPeriodo, d.interesPeriodo); })]);
-    yTotal.domain([0,d3.max(data, function(d) { return Math.max(d.capitalTotal, d.interesTotal); })]);
+    x.domain(d3.extent(data, d => d.periodo));
+    y.domain([0,d3.max(data, d => Math.max(d.capitalPeriodo, d.interesPeriodo))]);
+    yTotal.domain([0,d3.max(data, d => Math.max(d.capitalTotal, d.interesTotal))]);
 
     d3.select("#xAxis").call(xAxis);
     d3.select("#xAxisTotal").call(xAxis);
@@ -137,4 +138,31 @@ export default function updateCharts (data) {
     d3.select(".line4")
       .datum(data)
       .attr("d",lineInteresTotal);
-};
+}
+
+function responsivefy(svg) {
+    // get container + svg aspect ratio
+    var container = d3.select(svg.node().parentNode),
+        width = parseInt(svg.style("width"),10),
+        height = parseInt(svg.style("height"),10),
+        aspect = width / height;
+
+    // add viewBox and preserveAspectRatio properties,
+    // and call resize so that svg resizes on inital page load
+    svg.attr("viewBox", "0 0 " + width + " " + height)
+        .attr("perserveAspectRatio", "xMinYMid")
+        .call(resize);
+
+    // to register multiple listeners for same event type, 
+    // you need to add namespace, i.e., 'click.foo'
+    // necessary if you call invoke this function for multiple svgs
+    // api docs: https://github.com/mbostock/d3/wiki/Selections#on
+    d3.select(window).on("resize." + container.attr("id"), resize);
+
+    // get width of container and resize svg to fit it
+    function resize() {
+        var targetWidth = parseInt(container.style("width"),10);
+        svg.attr("width", targetWidth);
+        svg.attr("height", Math.round(targetWidth / aspect));
+    }
+}
