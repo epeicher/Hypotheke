@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/epeicher/Hypotheke#readme",
   "dependencies": {
-    "ejs": "^2.4.1",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "path": "^0.12.7"
   },
   "engines": {
     "node": "5.5.x"
