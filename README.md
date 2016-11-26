@@ -7,6 +7,33 @@ of the mortgage.
 
 Just move the slider to see the differences in interest and capital depening on the interest rate.
 
-Use the tool accessing http://hypotheke.herokuapp.com
+# Comparing Javascript Frameworks
 
-Or by github pages http://epeicher.github.io/Hypotheke/public/Hypotheke.html
+## Angular 1
+
+Created by Google, one of the Javascript Frameworks most widely 
+used. 
+
+[Hypotheke in Angular 1](http://epeicher.github.io/Hypotheke/ngpotheke/public/Hypotheke.html)
+
+[Repository for Angular 1 version](https://github.com/epeicher/Hypotheke/tree/master/ngpotheke)
+
+## React
+
+Created by Facebook, it is not a framework but a library **Declarative** and **Component-Based**
+
+> A javascript library for building user interfaces
+
+[Hypotheke in React](http://epeicher.github.io/Hypotheke/reactpotheke/build/)
+
+[Repository for React version](https://github.com/epeicher/Hypotheke/tree/master/reactpotheke)
+
+
+## Angular 2
+
+The *evolution* of the Angular 1 framework. It is very different
+to his *younger brother* with improved speed and performance.
+
+[Hypotheke in Angular 2](https://hypotheke.herokuapp.com/)
+
+[Repository for Angular 2 version](https://github.com/epeicher/Hypotheke/tree/master/ng2potheke)
