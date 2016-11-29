@@ -3,7 +3,7 @@ function calculateAmortizationTable(h) {
     let n = getAnnos(h)
     let	i = getInterest(h)
     let	c = calculateCuota(h)
-    let	k = h.C
+    let	k = h.Capital
     let [j, kp, ip, kt, it, d] = [0, 0, 0, 0, 0, 0];
     let tabla = [];
 
@@ -30,15 +30,15 @@ function calculateAmortizationTable(h) {
 }
 
 function calculateCuota(h) {
-    return (h.C * getInterest(h) / (1 - Math.pow(1 + getInterest(h), -1 * getAnnos(h))));
+    return (h.Capital * getInterest(h) / (1 - Math.pow(1 + getInterest(h), -1 * getAnnos(h))));
 }
 
 function getInterest(h) {
-    return h.i / 1200;
+    return h.InterestRate / 1200;
 }
 
 function getAnnos(h) {
-    return h.n * 12;
+    return h.Years * 12;
 }
 
 
