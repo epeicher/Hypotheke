@@ -8,7 +8,7 @@ export class MathService {
         let n = getAnnos(h)
         let	i = getInterest(h)
         let	c = this.calculateCuota(h)
-        let	k = h.capital;
+        let	k = h.Capital;
         let [j, kp, ip, kt, it, d] = [0, 0, 0, 0, 0, 0];
         let tabla = [];
 
@@ -35,17 +35,17 @@ export class MathService {
     }
 
     calculateCuota(h: Hipoteca) {
-        return (h.capital * getInterest(h) / (1 - Math.pow(1 + getInterest(h), -1 * getAnnos(h))));
+        return (h.Capital * getInterest(h) / (1 - Math.pow(1 + getInterest(h), -1 * getAnnos(h))));
     }
 
 }
 
 function getInterest(h: Hipoteca) {
-    return h.interes / 1200;
+    return h.InterestRate / 1200;
 }
 
 function getAnnos(h: Hipoteca) {
-    return h.agnos * 12;
+    return h.Years * 12;
 }
 
 function AddToTabla(h:ItemHipoteca[],j,k,i,kt,it) {

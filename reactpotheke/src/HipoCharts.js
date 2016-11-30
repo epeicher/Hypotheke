@@ -1,46 +1,87 @@
+import React, {Component} from 'react'
 import * as d3 from "d3";
 
-   var data = {};
+
+export default class HipoCharts extends Component {
+
+    componentDidMount() {
+        this.initChart();
+    }
+
+    render(props) {
+        console.log('props', props);
+        return (<div id="containerSvg"></div>);
+    }
+
+updateCharts (data) {
+    this.x.domain(d3.extent(data, d => d.periodo));
+    this.y.domain([0,d3.max(data, d => Math.max(d.capitalPeriodo, d.interesPeriodo))]);
+    this.yTotal.domain([0,d3.max(data, d => Math.max(d.capitalTotal, d.interesTotal))]);
+
+    d3.select("#xAxis").call(xAxis);
+    d3.select("#xAxisTotal").call(xAxis);
+    d3.select("#yAxis").call(yAxis);
+    d3.select("#yAxisTotal").call(yAxisTotal);
+
+    d3.select(".line")
+      .datum(data)
+      .attr("d",lineCapital);
+
+    d3.select(".line2")
+      .datum(data)
+      .attr("d",lineInteres);
+
+    d3.select(".line3")
+      .datum(data)
+      .attr("d",lineCapitalTotal);
+    d3.select(".line4")
+      .datum(data)
+      .attr("d",lineInteresTotal);
+}
+
+
+    initChart = () => {
+    var data = {};
 
    var margin = {top: 20, right: 60, bottom: 30, left: 60},
        browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
        width = browserWidth,
        height = 500;
 
-   var x = d3.scale.linear()
+   this.x = d3.scale.linear()
     .range([0, (width-margin.left-margin.right)/2]);
 
-   var y = d3.scale.linear()
+   this.y = d3.scale.linear()
     .range([height, 0]);
 
-   var yTotal = d3.scale.linear()
+   this.yTotal = d3.scale.linear()
     .range([height, 0]);
 
-   var xAxis = d3.svg.axis()
+   this.xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom");
 
-   var yAxis = d3.svg.axis()
+   this.yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
 
-   var yAxisTotal = d3.svg.axis()
+   this.yAxisTotal = d3.svg.axis()
     .scale(yTotal)
     .orient("left");
 
-   var lineCapital = d3.svg.line()
+   this.lineCapital = d3.svg.line()
     .x(function(d) { return x(d.periodo); })
     .y(function(d) { return y(d.capitalPeriodo); });
 
-   var lineInteres = d3.svg.line()
+   this.lineInteres = d3.svg.line()
     .x(function(d) { return x(d.periodo); })
     .y(function(d) { return y(d.interesPeriodo); });
 
-   var lineCapitalTotal = d3.svg.line()
+   this.lineCapitalTotal = d3.svg.line()
     .x(function(d) { return x(d.periodo); })
     .y(function(d) { return yTotal(d.capitalTotal); });
 
-   var lineInteresTotal = d3.svg.line()
+   this.lineInteresTotal = d3.svg.line()
     .x(function(d) { return x(d.periodo); })
     .y(function(d) { return yTotal(d.interesTotal); });
 
@@ -113,34 +154,10 @@ import * as d3 from "d3";
       .datum(data)
       .attr("class", "line4")
       .attr("d", lineInteresTotal);
-
-export default function updateCharts (data) {
-    x.domain(d3.extent(data, d => d.periodo));
-    y.domain([0,d3.max(data, d => Math.max(d.capitalPeriodo, d.interesPeriodo))]);
-    yTotal.domain([0,d3.max(data, d => Math.max(d.capitalTotal, d.interesTotal))]);
-
-    d3.select("#xAxis").call(xAxis);
-    d3.select("#xAxisTotal").call(xAxis);
-    d3.select("#yAxis").call(yAxis);
-    d3.select("#yAxisTotal").call(yAxisTotal);
-
-    d3.select(".line")
-      .datum(data)
-      .attr("d",lineCapital);
-
-    d3.select(".line2")
-      .datum(data)
-      .attr("d",lineInteres);
-
-    d3.select(".line3")
-      .datum(data)
-      .attr("d",lineCapitalTotal);
-    d3.select(".line4")
-      .datum(data)
-      .attr("d",lineInteresTotal);
+    }  
 }
 
-function responsivefy(svg) {
+  function responsivefy(svg) {
     // get container + svg aspect ratio
     var container = d3.select(svg.node().parentNode),
         width = parseInt(svg.style("width"),10),
@@ -165,4 +182,4 @@ function responsivefy(svg) {
         svg.attr("width", targetWidth);
         svg.attr("height", Math.round(targetWidth / aspect));
     }
-}
+    }

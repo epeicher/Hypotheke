@@ -1,3 +1,18 @@
+body {
+  margin: 2em;
+  font-family: sans-serif;
+}
+table {
+  font-size: medium;
+}
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+  margin-bottom: 20px;
+}
+
+/* D3 Styling*/
 .rangeInterest {
    width: 100%;
 }
@@ -16,23 +31,23 @@
  .line {
    fill: none;
    stroke: steelblue;
-   stroke-width: 1.5px;
+   stroke-width: 3px;
  }
 
  .line2 {
    fill: none;
    stroke: indianred;
-   stroke-width: 1.5px;
+   stroke-width: 3px;
  }
 
  .line3 {
    fill: none;
    stroke: blue;
-   stroke-width: 1.5px;
+   stroke-width: 3px;
  }
 
  .line4 {
    fill: none;
    stroke: red;
-   stroke-width: 1.5px;
+   stroke-width: 3px;
  }

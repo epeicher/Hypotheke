@@ -16,6 +16,7 @@
         </div>
       </div>
     </div>
+    <h1>Datos de la Hipoteca</h1>
     <div class="row">
       <div class="col-md-7">
         <form class="form-horizontal" role="form">
@@ -65,10 +66,10 @@
     <tbody>
       <tr ng-repeat="item in hipoteca.tablaAmortizacion">
         <td>{{item.periodo}}</td>
-        <td>{{item.capitalPeriodo}}</td>
-        <td>{{item.interesPeriodo}}</td>
-        <td>{{item.interesTotal}}</td>
-        <td>{{item.capitalTotal}}</td>
+        <td>{{item.capitalPeriodo | number}}</td>
+        <td>{{item.interesPeriodo | number}}</td>
+        <td>{{item.interesTotal | number}}</td>
+        <td>{{item.capitalTotal | number}}</td>
       </tr>
     </tbody>
   </table>

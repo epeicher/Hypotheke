@@ -6,31 +6,31 @@ const template = `
             <label for="iCapital" class="col-sm-3 control-label">Capital</label>
             <div class="col-sm-4">
               <input type="number" step="10000" class="form-control" id="iCapital" placeholder="Capital" 
-                ng-model="hipoteca.capital" value="{{hipoteca.capital}}" (change)="onChange('capital',$event)" >            
+                value="{{hipoteca.Capital}}" (change)="onChangeInner('Capital',$event)" >            
             </div>
           </div>
           <div class="form-group">
             <label for="iPeriodos" class="col-sm-3 control-label">Years</label>
             <div class="col-sm-4">
               <input type="number" class="form-control" id="iPeriodos" placeholder="Numero de años" 
-                value="{{hipoteca.agnos}}" ng-model="hipoteca.agnos" (change)="onChange('agnos',$event)">
+                value="{{hipoteca.Years}}" (change)="onChangeInner('Years',$event)">
             </div>
           </div>
           <div class="form-group">
             <label for="rangeInterest" class="col-sm-3 control-label">Interest Rate: </label>     
             <div class="col-sm-3">      
-              <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" ng-model="hipoteca.interes" 
-                value="{{hipoteca.interes}}" step="0.1" class="rangeInterest" (change)="onChange('interes',$event)" />
+              <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" 
+                value="{{hipoteca.InterestRate}}" step="0.1" class="rangeInterest" (change)="onChangeInner('InterestRate',$event)" />
             </div>
-            <label id="interestRate" class="col-sm-1 control-label">{{hipoteca.interes}}</label>
+            <label id="interestRate" class="col-sm-1 control-label">{{hipoteca.InterestRate}}</label>
           </div>
           <div class="form-group">
             <label for="totalInterestPaid" class="col-sm-3 control-label">Total Interests paid:</label>                
-              <label id="totalInterestPaid" class="col-sm-4 control-label">{{hipoteca.totalInteres | number:'.0-2'}}</label>            
+              <label id="totalInterestPaid" class="col-sm-4 control-label">{{hipoteca.TotalInterest | number:'.0-2'}}</label>            
           </div>
           <div class="form-group">
             <label for="cuota" class="col-sm-3 control-label">Payment:</label>                
-              <label id="cuota" class="col-sm-4 control-label">{{hipoteca.cuota | number:'.0-2'}}</label>            
+              <label id="cuota" class="col-sm-4 control-label">{{hipoteca.Payment | number:'.0-2'}}</label>            
           </div>          
         </form>
       </div>           
@@ -47,29 +47,13 @@ import Hipoteca from './Models/Hipoteca'
 })
 export class HypoForm {
 
-    cuota
-
     @Input()
     hipoteca: Hipoteca;
 
-    @Output() onChangeCapital = new EventEmitter<number>();
-    @Output() onChangeAgnos = new EventEmitter<number>();
-    @Output() onChangeInteres = new EventEmitter<number>();
+    @Output() onChange = new EventEmitter();
 
-    onChange(origin, e) {
-      switch(origin) {
-        case 'capital':
-          this.onChangeCapital.emit(e.target.value)
-          break;
-        case 'agnos':
-          this.onChangeAgnos.emit(e.target.value)
-          break;
-        case 'interes':
-          this.onChangeInteres.emit(e.target.value)
-          break;
-        default:
-          console.error('Incorrect origin of event');
-      }
+    onChangeInner(origin : string, e) {
+      this.onChange.emit({property: origin, value: e.target.value});
     }
 
  }

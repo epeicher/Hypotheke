@@ -16,23 +16,23 @@
  .line {
    fill: none;
    stroke: steelblue;
-   stroke-width: 1.5px;
+   stroke-width: 3px;
  }
 
  .line2 {
    fill: none;
    stroke: indianred;
-   stroke-width: 1.5px;
+   stroke-width: 3px;
  }
 
  .line3 {
    fill: none;
    stroke: blue;
-   stroke-width: 1.5px;
+   stroke-width: 3px;
  }
 
  .line4 {
    fill: none;
    stroke: red;
-   stroke-width: 1.5px;
+   stroke-width: 3px;
  }
