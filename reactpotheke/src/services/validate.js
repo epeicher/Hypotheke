@@ -1,11 +1,11 @@
 export default function validate(prop, value) {
     switch(prop) {
-        case 'n':
+        case 'Years':
             if((0 > value || value > 100)) {
                 return false;
             }             
         break;
-        case 'C':
+        case 'Capital':
             if(1 > value || value > 1000000000) {
                 return false;
             } 

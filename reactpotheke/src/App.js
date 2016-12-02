@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-import updateCharts from './services/charts';
 import * as hypoMath from './services/mathServiceModule';
 import AmortizationTable from './AmortizationTable'
 import HipoForm from './HipoForm'
 import validate from './services/validate'
 import HipoModel from './HipoModel'
-//import HipoCharts from './HipoCharts'
+import HipoCharts from './HipoCharts'
 
 class App extends Component {
 
   constructor() {
     super();
-    this.state = {HipoModel: new HipoModel()};
-    let data = hypoMath.calculateAmortizationTable(this.state.HipoModel);
-    updateCharts(data);
+    this.state = {HipoModel: new HipoModel()};    
   }
 
   componentWillMount() {
@@ -22,8 +19,7 @@ class App extends Component {
 
   updateState(newSt) {
     let data = hypoMath.calculateAmortizationTable(newSt.HipoModel);
-    let cuota = data.length === 0 ? 0 : hypoMath.calculateCuota(newSt.HipoModel);
-    updateCharts(data);
+    let cuota = hypoMath.calculateCuota(newSt.HipoModel);
 
     let newHipoModel = Object.assign(this.state.HipoModel,
       {AmortizationTable: data}, {Payment : cuota});    
@@ -32,14 +28,10 @@ class App extends Component {
 
 
   updateHypotheke(property,{target : {value: v}}) {
-    let st = {};
-    if(!v) {
-      let newHipoModel = Object.assign(this.state.HipoModel, {[property] : 0});        
-      st = Object.assign(this.state, {HipoModel:newHipoModel});
-    } else if(validate(property,v)) {
-      let newHipoModel = Object.assign(this.state.HipoModel, {[property] : v});        
-      st = Object.assign(this.state, {HipoModel:newHipoModel});
-
+    let st = this.state;
+    if(validate(property,v)) {
+      let newHipoModel = Object.assign(st.HipoModel, {[property] : v});        
+      st = Object.assign(st, {HipoModel:newHipoModel});
     }
     this.updateState(st);
   }
@@ -47,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <div className="container-fluid">
-              
+        <HipoCharts data={this.state.HipoModel.AmortizationTable} />              
         <h1>Datos de la Hipoteca</h1>
         <HipoForm {...this.state.HipoModel} onChange={this.updateHypotheke.bind(this)} />
         <AmortizationTable tablaAmortizacion={this.state.HipoModel.AmortizationTable} />
