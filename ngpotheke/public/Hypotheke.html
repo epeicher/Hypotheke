@@ -24,23 +24,23 @@
             <label for="iCapital" class="col-sm-3 control-label">Capital</label>
             <div class="col-sm-4">
               <input type="number" step="10000" class="form-control" id="iCapital" placeholder="Capital" 
-                ng-model="hipoteca.C" value="{{hipoteca.C}}" ng-change="onChange()" >            
+                ng-model="hipoteca.Capital" value="{{hipoteca.Capital}}" ng-change="onChange()" >            
             </div>
           </div>
           <div class="form-group">
             <label for="iPeriodos" class="col-sm-3 control-label">Years</label>
             <div class="col-sm-4">
               <input type="number" class="form-control" id="iPeriodos" placeholder="Numero de años" 
-                value="{{hipoteca.n}}" ng-model="hipoteca.n" ng-change="onChange()">
+                value="{{hipoteca.Years}}" ng-model="hipoteca.Years" ng-change="onChange()">
             </div>
           </div>
           <div class="form-group">
             <label for="rangeInterest" class="col-sm-3 control-label">Interest Rate: </label>     
             <div class="col-sm-3">      
-              <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" ng-model="hipoteca.i" 
-                value="{{hipoteca.i}}" step="0.1" class="rangeInterest" ng-change="onChange()" />
+              <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" ng-model="hipoteca.InterestRate" 
+                value="{{hipoteca.InterestRate}}" step="0.1" class="rangeInterest" ng-change="onChange()" />
             </div>
-            <label id="interestRate" class="col-sm-1 control-label">{{hipoteca.i}}</label>
+            <label id="interestRate" class="col-sm-1 control-label">{{hipoteca.InterestRate}}</label>
           </div>
           <div class="form-group">
             <label for="totalInterestPaid" class="col-sm-3 control-label">Total Interests paid:</label>                
@@ -74,7 +74,7 @@
     </tbody>
   </table>
   </div>
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
   <script src="js/mathServiceModule.js" charset="utf-8"></script>
   <script src="js/charts.js" charset="utf-8"></script>   

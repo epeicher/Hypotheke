@@ -3,11 +3,11 @@ angular.module('app',['mathServiceModule', 'charts'])
   function($scope, hypoMath, chartsService) {
 
     $scope.hipoteca = {
-      n : 30,
-      i : 2,
-      C : 150000,
-      getAnnos: function() { return this.n * 12; },
-      getInterest: function() {return this.i / 1200;},
+      Years : 30,
+      InterestRate : 2,
+      Capital : 150000,
+      getYears: function() { return this.Years * 12; },
+      getInterest: function() {return this.InterestRate / 1200;},
       getCuota : function () { 
         var c = hypoMath.calculateCuota(this);
         return Math.round(c*100)/100;
@@ -32,7 +32,7 @@ angular.module('app',['mathServiceModule', 'charts'])
     var changeValue = function () {
 
       data = hypoMath.calculateAmortizationTable($scope.hipoteca);  
-	  $scope.hipoteca.tablaAmortizacion = data;
+	    $scope.hipoteca.tablaAmortizacion = data;
 
       updateData(data);
     }

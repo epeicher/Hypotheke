@@ -3,8 +3,6 @@ angular.module('charts',[])
 
   var chartsServiceInstance = {};
 
-   var data = {};
-
    var margin = {top: 20, right: 30, bottom: 30, left: 70},
        browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
        width = browserWidth - margin.left - margin.right,
@@ -49,13 +47,14 @@ angular.module('charts',[])
 
    var globalSvg = d3.select("#containerSvg")   
     .append("svg")
-    .attr("width", width+margin.right)
+    .attr("width", width+margin.left+margin.right)
     .attr("height", height + margin.top + margin.bottom);
 
    var svgPeriodo = globalSvg
     .append("g")
     .attr("id","porPeriodo")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
    var svgAcumulado = globalSvg
     .append("g")
     .attr("id","total")
@@ -96,25 +95,16 @@ angular.module('charts',[])
       .text("€ Totales");
 
      svgPeriodo.append("path")
-      .datum(data)
       .attr("class", "line")
-      .attr("d", lineCapital);
 
      svgPeriodo.append("path")
-      .datum(data)
       .attr("class", "line2")
-      .attr("d", lineInteres);
-
 
      svgAcumulado.append("path")
-      .datum(data)
       .attr("class", "line3")
-      .attr("d", lineCapitalTotal);
 
      svgAcumulado.append("path")
-      .datum(data)
       .attr("class", "line4")
-      .attr("d", lineInteresTotal);
 
     chartsServiceInstance.updateCharts = function (data) {
       x.domain(d3.extent(data, function(d) { return d.periodo; }));
@@ -127,19 +117,16 @@ angular.module('charts',[])
       d3.select("#yAxisTotal").call(yAxisTotal);
 
       d3.select(".line")
-       .datum(data)
-       .attr("d",lineCapital);
+       .attr("d",lineCapital(data))
 
       d3.select(".line2")
-       .datum(data)
-       .attr("d",lineInteres);
+       .attr("d",lineInteres(data));
 
       d3.select(".line3")
-       .datum(data)
-       .attr("d",lineCapitalTotal);
+       .attr("d",lineCapitalTotal(data));
+
       d3.select(".line4")
-       .datum(data)
-       .attr("d",lineInteresTotal);
+       .attr("d",lineInteresTotal(data));
     };
 
     return chartsServiceInstance;

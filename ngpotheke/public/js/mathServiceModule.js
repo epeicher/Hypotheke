@@ -2,13 +2,12 @@ angular.module('mathServiceModule',[])
 .factory('hypoMath', function() {
 
 	var my = {};
-	var tabla = [];
 
 	my.calculateAmortizationTable = function (h) {
-	    var n = h.getAnnos(),
+	    var n = h.getYears(),
 	     i = h.getInterest(),
 	     c = my.calculateCuota(h),
-	     k = h.C,
+	     k = h.Capital,
 	     j = 0,
 	     kp = 0,
 	     ip = 0,
@@ -16,7 +15,7 @@ angular.module('mathServiceModule',[])
 	     it = 0,
 	     d = 0;
 
-		tabla.splice(0,tabla.length)
+		var tabla = [];
 
 	    while (n > 0) {
 	     n -= 1;
@@ -42,7 +41,7 @@ angular.module('mathServiceModule',[])
 	}
 
 	my.calculateCuota = function (h) {
-		return (h.C * h.getInterest() / (1 - Math.pow(1 + h.getInterest(), -1 * h.getAnnos())));
+		return (h.Capital * h.getInterest() / (1 - Math.pow(1 + h.getInterest(), -1 * h.getYears())));
 	}
 
 	function AddToTabla(h,j,k,i,kt,it) {
