@@ -9,6 +9,8 @@ Just move the slider to see the differences in interest and capital depening on 
 
 # Comparing Javascript Frameworks
 
+Slides can be found in this [link](http://epeicher.github.io/Hypotheke/slides2/output)
+
 ## Angular 1
 
 Created by Google, one of the Javascript Frameworks most widely 
