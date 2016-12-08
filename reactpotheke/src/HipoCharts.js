@@ -29,19 +29,16 @@ export default class HipoCharts extends Component {
         d3.select("#yAxisTotal").call(this.yAxisTotal);
 
         d3.select(".line")
-            .datum(data)
-            .attr("d", this.lineCapital);
+            .attr("d", this.lineCapital(data));
 
         d3.select(".line2")
-            .datum(data)
-            .attr("d", this.lineInteres);
+            .attr("d", this.lineInteres(data));
 
         d3.select(".line3")
-            .datum(data)
-            .attr("d", this.lineCapitalTotal);
+            .attr("d", this.lineCapitalTotal(data));
+
         d3.select(".line4")
-            .datum(data)
-            .attr("d", this.lineInteresTotal);
+            .attr("d", this.lineInteresTotal(data));
     }
 
 

@@ -2,7 +2,9 @@ import React from 'react'
 import formatNum from './services/formatter'
 
 export default (props) => {
+  
     let {Payment, Years, Capital, InterestRate, getTotalInterest, onChange} = props;
+
     return (
     <div className="row">
       <h1>Datos de la Hipoteca</h1>

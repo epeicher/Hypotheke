@@ -48,6 +48,10 @@
 ***
 - data-background : images/cross.png
 - data-background-repeat : no-repeat
+- data-background-size: 250px
+- data-background-position: 50% 50%
+- data-background-transition: none
+- data-transition: none 
 
 # Agenda
 
@@ -126,7 +130,7 @@ Me: “No, Javascript.”
 
 ***
 
-# Create-React-App
+## create-react-app
 
 Paquete NodeJs para crear aplicaciones con React, 
 incluye el *transpilador*, *bundler*, *hot-realoading*, *server*, etc. con
@@ -135,19 +139,54 @@ incluye el *transpilador*, *bundler*, *hot-realoading*, *server*, etc. con
 
 ***
 
-## Vamos a Verlo
+## Vamos a verlo
 
 ***
 
-### The Reality of a Developer's Life 
+2016... y pico
 
-**When I show my boss that I've fixed a bug:**
-  
-![When I show my boss that I've fixed a bug](http://www.topito.com/wp-content/uploads/2013/01/code-07.gif)
-  
-**When your regular expression returns what you expect:**
-  
-![When your regular expression returns what you expect](http://www.topito.com/wp-content/uploads/2013/01/code-03.gif)
-  
-*from [The Reality of a Developer's Life - in GIFs, Of Course](http://server.dzone.com/articles/reality-developers-life-gifs)*
+***
 
+# AngularJS 2
+
+- One framework
+- Creado por *Google* no es una evolución de Angular 1 sino una re-escritura desde cero
+- También está basado en Componentes pero contiene mucho más que *UI*
+- Mejora notablemente el rendimiento gracias a una nueva estrategia de detección de cambios
+- Usa una librería externa llamada *ZoneJs* para notificar los cambios
+
+***
+
+## Vamos al turrón
+
+***
+
+# Conclusiones
+
+- Hay una clara tendencia al diseño orientado a Componentes, no solo en React y Angular 2 sino en otros frameworks
+
+- El *Front End Development* ha cambiado y cambia a gran velocidad como se puede ver comparando Angular 1 y 2
+
+- A pesar de las diferencias se identifican patrones comunes. Los frameworks
+son herramientas pero los buenos principios los pones tu: *Single Responsibility y Separation of Concerns*
+
+- React es solo una librería de UI mientras que Angular es un framework completo.
+Esto implica la necesidad de tomar más decisiones en desarrollo y más diferencias 
+entre aplicaciones.
+
+- React facilita la Composición de una manera natural y simple, 
+Angular 2 parece más *verbose*
+
+*** 
+
+> No hay ni habrá un *Framework que los gobierne a todos*
+
+***
+
+# ¿Preguntas?
+
+***
+- data-background : images/Dotnet16-9.png
+- data-background-repeat : no-repeat
+- data-background-transition: none
+- data-background-position: 50% 50%

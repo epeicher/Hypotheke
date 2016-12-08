@@ -18,11 +18,11 @@ class App extends Component {
   }
 
   updateState(newSt) {
-    let data = hypoMath.calculateAmortizationTable(newSt.HipoModel);
+    let table = hypoMath.calculateAmortizationTable(newSt.HipoModel);
     let cuota = hypoMath.calculateCuota(newSt.HipoModel);
 
     let newHipoModel = Object.assign(this.state.HipoModel,
-      {AmortizationTable: data}, {Payment : cuota});    
+      {AmortizationTable: table}, {Payment : cuota});    
     this.setState(Object.assign(this.state, {HipoModel: newHipoModel}));      
   }
 

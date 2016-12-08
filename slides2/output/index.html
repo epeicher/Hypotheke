@@ -1,0 +1,252 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Angular1 vs React vs Angular2</title>
+    <meta name="description" content="Comparison of JavaScript frameworks">
+    <meta name="author" content="Roberto Aranda">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="//code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="//code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/night.css" id="theme">
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/style.css" />
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/deedle.css" />
+    <link type="text/css" rel="stylesheet" href="css/custom.css" />
+    <script src="fsharp.formatting/styles/tips.js" type="text/javascript"></script>
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/fsreveal.css">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <script language="javascript" type="text/javascript">
+        function init()
+        {
+            websocket = new WebSocket("ws://"+window.location.host+"/websocket");
+            websocket.onmessage = function(evt) { location.reload(); };
+        }
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+    <div class="reveal">
+        
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section data-background="images/Dotnet16-9.png" data-background-position="50% 50%" data-background-repeat="no-repeat" data-background-transition="none">
+</section>
+<section >
+<h2>Migrando de Angular 1 a React y a Angular 2!?</h2>
+<p><a href="https://twitter.com/glomenar">@glomenar</a></p>
+<p><img src="images/ngvsreact.png" alt="Logo" /></p>
+</section>
+<section >
+<h2><span class="mj-color">Roberto Aranda</span></h2>
+<ul>
+<li>
+<em>Lead Developer</em> en <em>Sequel Business Solutions</em>
+<ul>
+<li>SQL</li>
+<li>Backend</li>
+<li>Front end apasionado</li>
+</ul>
+</li>
+<li>10+ años desarrollando software</li>
+</ul>
+<p><img src="images/rob.jpeg" alt="Rob" /></p>
+<p><a href="https://twitter.com/glomenar">@glomenar</a></p>
+<p><a href="mailto:ese.rober@gmail.com">ese.rober@gmail.com</a></p>
+</section>
+<section data-transition="none">
+<section data-markdown>
+    <script type="text/template">
+<h1>Agenda</h1>
+<ul>
+<li>Angular 1     <!-- .element: class="fragment" data-fragment-index="1" --></li>
+<li>React         <!-- .element: class="fragment" data-fragment-index="2" --></li>
+<li>
+Angular 2     <!-- .element: class="fragment" data-fragment-index="3" -->
+</script>
+</section>
+</li>
+</ul>
+</section>
+<section data-background="images/cross.png" data-background-position="50% 50%" data-background-repeat="no-repeat" data-background-size="250px" data-background-transition="none" data-transition="none">
+<h1>Agenda</h1>
+<ul>
+<li>Angular 1</li>
+<li>React</li>
+<li>Angular 2</li>
+</ul>
+</section>
+<section data-transition="none">
+<p>Una historia</p>
+</section>
+<section >
+<p>2014</p>
+</section>
+<section >
+<h1>Hypotheke</h1>
+</section>
+<section >
+<h3>Hypotheke?</h3>
+<img src="images/hypo.png" width="600" />
+<p><a href="https://hypotheke.herokuapp.com/">link</a></p>
+</section>
+<section >
+<h1>AngularJS 1</h1>
+<ul>
+<li>Superheroic JavaScript MVVM Framework</li>
+<li>Creado por <em>Google</em> es uno de los frameworks de JavaScript más usados</li>
+<li>Tiene todo lo necesario para crear una <em>Single Page Application</em></li>
+<li>Usa un <em>event loop</em> conocido como <em>$digest loop</em> para aplicar cambios</li>
+</ul>
+</section>
+<section >
+<h1>Show me the Code</h1>
+</section>
+<section >
+<p>2016</p>
+</section>
+<section >
+<h1>React</h1>
+<ul>
+<li>A JavaScript library for building user interfaces</li>
+<li>Creado por <em>Facebook</em> es una apuesta segura estos días</li>
+<li>Declarativo y basado en Componentes</li>
+<li>Usa el concepto de <em>Virtual DOM</em> para minimizar el <em>rendering</em></li>
+</ul>
+</section>
+<section >
+<h1>Implicaciones</h1>
+<section data-markdown>
+    <script type="text/template">
+- Creas elementos HTML en tus ficheros JavaScript  <!-- .element: class="fragment"-->
+- Inventan un nuevo lenguaje para aliviar el paso anterior denominado JSX <!-- .element: class="fragment"-->
+- JSX es simplemente insertar HTML en el fichero JavaScript <!-- .element: class="fragment"-->
+- Hay que compilar JSX como un paso previo <!-- .element: class="fragment"-->
+- No se llama compilar, se llama transpilar <!-- .element: class="fragment"-->
+- Se usa Babel que realiza la compilación <!-- .element: class="fragment"-->
+- Para usar el navegador, necesitas dos librerias: React y ReactDOM <!-- .element: class="fragment"-->
+- Los componentes de React se pueden crear como clases ES6 extendiendo React.Component <!-- .element: class="fragment"-->
+- No se llama ES6, se llama ES2015 <!-- .element: class="fragment"-->
+    </script>
+</section>
+</section>
+<section >
+<h1>Javascript Fatigue</h1>
+<p>Saul: “How’s it going?”</p>
+<p>Me: “Fatigued.”</p>
+<p>Saul: “Family?”</p>
+<p>Me: “No, Javascript.”</p>
+</section>
+<section >
+<h2>create-react-app</h2>
+<p>Paquete NodeJs para crear aplicaciones con React,
+incluye el <em>transpilador</em>, <em>bundler</em>, <em>hot-realoading</em>, <em>server</em>, etc. con</p>
+<p><em>Zero Configuration</em></p>
+</section>
+<section >
+<h2>Vamos a verlo</h2>
+</section>
+<section >
+<p>2016... y pico</p>
+</section>
+<section >
+<h1>AngularJS 2</h1>
+<ul>
+<li>One framework</li>
+<li>Creado por <em>Google</em> no es una evolución de Angular 1 sino una re-escritura desde cero</li>
+<li>También está basado en Componentes pero contiene mucho más que <em>UI</em></li>
+<li>Mejora notablemente el rendimiento gracias a una nueva estrategia de detección de cambios</li>
+<li>Usa una librería externa llamada <em>ZoneJs</em> para notificar los cambios</li>
+</ul>
+</section>
+<section >
+<h2>Vamos al turrón</h2>
+</section>
+<section >
+<h1>Conclusiones</h1>
+<ul>
+<li>Hay una clara tendencia al diseño orientado a Componentes, no solo en React y Angular 2 sino en otros frameworks</li>
+<li><p>El <em>Front End Development</em> ha cambiado y cambia a gran velocidad como se puede ver comparando Angular 1 y 2</p></li>
+<li>
+<p>A pesar de las diferencias se identifican patrones comunes. Los frameworks
+son herramientas pero los buenos principios los pones tu: <em>Single Responsibility y Separation of Concerns</em></p>
+</li>
+<li>
+<p>React es solo una librería de UI mientras que Angular es un framework completo.
+Esto implica la necesidad de tomar más decisiones en desarrollo y más diferencias
+entre aplicaciones.</p>
+</li>
+<li>
+<p>React facilita la Composición de una manera natural y simple,
+Angular 2 parece más <em>verbose</em></p>
+</li>
+</ul>
+</section>
+<section >
+<blockquote>
+<p>No hay ni habrá un <em>Framework que los gobierne a todos</em></p>
+</blockquote>
+</section>
+<section >
+<h1>¿Preguntas?</h1>
+</section>
+<section data-background="images/Dotnet16-9.png" data-background-position="50% 50%" data-background-repeat="no-repeat" data-background-transition="none">
+</section>
+
+
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        // Add the nohighlight class and data-noescape attribute to code elements that have already been formatted by FSharp.Formatting
+        $('pre.highlighted code').addClass('nohighlight').attr('data-noescape', '');
+
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Parallax scrolling
+            // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+            // parallaxBackgroundSize: '2100px 900px',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } }
+            ]
+        });
+
+    </script>
+</body>
+</html>
+
