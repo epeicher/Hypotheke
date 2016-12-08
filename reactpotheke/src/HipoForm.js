@@ -5,6 +5,7 @@ export default (props) => {
     let {Payment, Years, Capital, InterestRate, getTotalInterest, onChange} = props;
     return (
     <div className="row">
+      <h1>Datos de la Hipoteca</h1>
       <div className="col-md-7">
         <form className="form-horizontal" role="form">
           <div className="form-group">

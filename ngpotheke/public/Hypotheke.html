@@ -1,83 +1,82 @@
 <!DOCTYPE html>
 <html ng-app="app">
+
 <head>
- <meta charset="utf-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">  
- <!-- load bootstrap and fontawesome via CDN -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
- <link rel="stylesheet" type="text/css" href="css/hypotheke.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- load bootstrap and fontawesome via CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/hypotheke.css">
 </head>
 
 <body>
+  <div id="containerSvg"></div>
+
+  <h1>Datos de la Hipoteca</h1>
   <div class="container-fluid" ng-controller="HypoCtrl">
-    <div  class="row">
-      <div class="col-md-12">
-        <div id="containerSvg" >
-        </div>
-      </div>
-    </div>
-    <h1>Datos de la Hipoteca</h1>
     <div class="row">
       <div class="col-md-7">
         <form class="form-horizontal" role="form">
           <div class="form-group">
             <label for="iCapital" class="col-sm-3 control-label">Capital</label>
             <div class="col-sm-4">
-              <input type="number" step="10000" class="form-control" id="iCapital" placeholder="Capital" 
-                ng-model="hipoteca.Capital" value="{{hipoteca.Capital}}" ng-change="onChange()" >            
+              <input type="number" step="10000" class="form-control" id="iCapital" placeholder="Capital" ng-model="hipoteca.Capital" value="{{hipoteca.Capital}}"
+                ng-change="onChange()">
             </div>
           </div>
           <div class="form-group">
             <label for="iPeriodos" class="col-sm-3 control-label">Years</label>
             <div class="col-sm-4">
-              <input type="number" class="form-control" id="iPeriodos" placeholder="Numero de años" 
-                value="{{hipoteca.Years}}" ng-model="hipoteca.Years" ng-change="onChange()">
+              <input type="number" class="form-control" id="iPeriodos" placeholder="Numero de años" value="{{hipoteca.Years}}" ng-model="hipoteca.Years"
+                ng-change="onChange()">
             </div>
           </div>
           <div class="form-group">
-            <label for="rangeInterest" class="col-sm-3 control-label">Interest Rate: </label>     
-            <div class="col-sm-3">      
-              <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" ng-model="hipoteca.InterestRate" 
-                value="{{hipoteca.InterestRate}}" step="0.1" class="rangeInterest" ng-change="onChange()" />
+            <label for="rangeInterest" class="col-sm-3 control-label">Interest Rate: </label>
+            <div class="col-sm-3">
+              <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" step="0.1" class="rangeInterest" ng-model="hipoteca.InterestRate"
+                value="{{hipoteca.InterestRate}}" ng-change="onChange()" />
             </div>
             <label id="interestRate" class="col-sm-1 control-label">{{hipoteca.InterestRate}}</label>
           </div>
           <div class="form-group">
-            <label for="totalInterestPaid" class="col-sm-3 control-label">Total Interests paid:</label>                
-              <label id="totalInterestPaid" class="col-sm-4 control-label"></label>            
+            <label for="totalInterestPaid" class="col-sm-3 control-label">Total Interests paid:</label>
+            <label id="totalInterestPaid" class="col-sm-4 control-label">{{hipoteca.TotalInterestPaid}}</label>
           </div>
           <div class="form-group">
-            <label for="cuota" class="col-sm-3 control-label">Payment:</label>                
-              <label id="cuota" class="col-sm-4 control-label">{{hipoteca.getCuota()}}</label>            
-          </div>          
+            <label for="cuota" class="col-sm-3 control-label">Payment:</label>
+            <label id="cuota" class="col-sm-4 control-label">{{hipoteca.getCuota()}}</label>
+          </div>
         </form>
-      </div>           
-    </div>   
+      </div>
+    </div>
+
     <table class="table table-condensed table-striped">
-    <thead>
-      <tr>
-        <th>Periodo</th>
-        <th>Capital Periodo</th>
-        <th>Interes Periodo</th>
-        <th>Interes Total</th>
-        <th>Capital Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="item in hipoteca.tablaAmortizacion">
-        <td>{{item.periodo}}</td>
-        <td>{{item.capitalPeriodo | number}}</td>
-        <td>{{item.interesPeriodo | number}}</td>
-        <td>{{item.interesTotal | number}}</td>
-        <td>{{item.capitalTotal | number}}</td>
-      </tr>
-    </tbody>
-  </table>
+      <thead>
+        <tr>
+          <th>Periodo</th>
+          <th>Capital Periodo</th>
+          <th>Interes Periodo</th>
+          <th>Interes Total</th>
+          <th>Capital Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in hipoteca.tablaAmortizacion">
+          <td>{{item.periodo}}</td>
+          <td>{{item.capitalPeriodo | number}}</td>
+          <td>{{item.interesPeriodo | number}}</td>
+          <td>{{item.interesTotal | number}}</td>
+          <td>{{item.capitalTotal | number}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
- <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
-  <script src="js/mathServiceModule.js" charset="utf-8"></script>
-  <script src="js/charts.js" charset="utf-8"></script>   
-  <script src="js/app.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/mathServiceModule.js"></script>
+  <script src="js/charts.js"></script>
 </body>
+
 </html>

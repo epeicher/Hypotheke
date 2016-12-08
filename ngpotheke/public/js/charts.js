@@ -1,5 +1,5 @@
-angular.module('charts',[])
-.factory('chartsService',['hypoMath', function(hypoMath){
+angular.module('app')
+.factory('chartsService',function(){
 
   var chartsServiceInstance = {};
 
@@ -131,5 +131,5 @@ angular.module('charts',[])
 
     return chartsServiceInstance;
 
-}]);
+});
 

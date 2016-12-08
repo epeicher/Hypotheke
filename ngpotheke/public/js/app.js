@@ -1,46 +1,43 @@
-angular.module('app',['mathServiceModule', 'charts'])
-.controller('HypoCtrl', ['$scope','hypoMath', 'chartsService', 
-  function($scope, hypoMath, chartsService) {
+angular.module('app',[])
+  .controller('HypoCtrl', ['$scope', 'hypoMath', 'chartsService',
 
-    $scope.hipoteca = {
-      Years : 30,
-      InterestRate : 2,
-      Capital : 150000,
-      getYears: function() { return this.Years * 12; },
-      getInterest: function() {return this.InterestRate / 1200;},
-      getCuota : function () { 
-        var c = hypoMath.calculateCuota(this);
-        return Math.round(c*100)/100;
+    function ($scope, hypoMath, chartsService) {
+
+      $scope.hipoteca = {
+        Years: 30,
+        InterestRate: 2,
+        Capital: 150000,
+        getPeriods: function () { return this.Years * 12; },
+        getInterest: function () { return this.InterestRate / 1200; },
+        getCuota: function () {
+          var c = hypoMath.calculateCuota(this);
+          return Math.round(c * 100) / 100;
+        }
+      };
+
+      function updateTotalInterestPaid(d) {
+        var totalInterest = d.slice(-1).pop().interesTotal;
+        $scope.hipoteca.TotalInterestPaid = Math.round(totalInterest * 100) / 100;
       }
-   };
 
-	var initializeData = function () {
-	    changeValue();
-   } 
+      function updateData(d) {
+        updateTotalInterestPaid(d);
 
-    function updateTotalInterestPaid(d) {
-      var totalInterest = d.slice(-1).pop().interesTotal;
-      document.getElementById("totalInterestPaid").innerHTML = Math.round(totalInterest*100)/100;      
-    }
+        chartsService.updateCharts(d);
+      }
 
-    var updateData = function (d) {
-          updateTotalInterestPaid(d);        
+      function changeValue() {
 
-          chartsService.updateCharts(d);
-    }
+        data = hypoMath.calculateAmortizationTable($scope.hipoteca);
+        $scope.hipoteca.tablaAmortizacion = data;
 
-    var changeValue = function () {
+        updateData(data);
+      }
 
-      data = hypoMath.calculateAmortizationTable($scope.hipoteca);  
-	    $scope.hipoteca.tablaAmortizacion = data;
+      $scope.onChange = function () {
+        changeValue();
+      }
 
-      updateData(data);
-    }
-
-    $scope.onChange = function() {
       changeValue();
-    }    
 
-    initializeData();
-
-}]);
+    }]);

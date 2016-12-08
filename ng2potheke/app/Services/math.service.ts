@@ -27,7 +27,7 @@ export class MathService {
             }
             else
             {
-                AddToTabla(tabla, j, k, i * k, kt, it);
+                AddToTabla(tabla, j, k, i*k, kt+k, it+(i*k));
             }
             k = d;
         }

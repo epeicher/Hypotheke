@@ -39,8 +39,7 @@ class App extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <HipoCharts data={this.state.HipoModel.AmortizationTable} />              
-        <h1>Datos de la Hipoteca</h1>
+        <HipoCharts data={this.state.HipoModel.AmortizationTable} />                      
         <HipoForm {...this.state.HipoModel} onChange={this.updateHypotheke.bind(this)} />
         <AmortizationTable tablaAmortizacion={this.state.HipoModel.AmortizationTable} />
       </div>
