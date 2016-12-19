@@ -40,7 +40,7 @@ class App extends Component {
     return (
       <div className="container-fluid">
         <HipoCharts data={this.state.HipoModel.AmortizationTable} />                      
-        <HipoForm {...this.state.HipoModel} onChange={this.updateHypotheke.bind(this)} />
+        <HipoForm {...this.state.HipoModel} onChangeForm={this.updateHypotheke.bind(this)} />
         <AmortizationTable tablaAmortizacion={this.state.HipoModel.AmortizationTable} />
       </div>
     );

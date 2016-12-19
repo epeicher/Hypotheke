@@ -3,7 +3,7 @@ import formatNum from './services/formatter'
 
 export default (props) => {
   
-    let {Payment, Years, Capital, InterestRate, getTotalInterest, onChange} = props;
+    let {Payment, Years, Capital, InterestRate, getTotalInterest, onChangeForm} = props;
 
     return (
     <div className="row">
@@ -14,21 +14,21 @@ export default (props) => {
             <label htmlFor="iCapital" className="col-sm-3 control-label">Capital</label>
             <div className="col-sm-4">
               <input type="number" step="10000" className="form-control" id="iCapital" placeholder="Capital" 
-                value={Capital} onChange={(e) => onChange("Capital",e)} min="1" max="1000000000" />            
+                value={Capital} onChange={(e) => onChangeForm("Capital",e)} min="1" max="1000000000" />            
             </div>
           </div>
           <div className="form-group">
             <label htmlFor="iPeriodos" className="col-sm-3 control-label">Years</label>
             <div className="col-sm-4">
               <input type="number" className="form-control" id="iPeriodos" placeholder="Numero de años" 
-                value={Years} onChange={(e) => onChange("Years",e)} min="1" max="100" />
+                value={Years} onChange={(e) => onChangeForm("Years",e)} min="1" max="100" />
             </div>
           </div>
           <div className="form-group">
             <label htmlFor="rangeInterest" className="col-sm-3 control-label">Interest Rate: </label>     
             <div className="col-sm-3">      
               <input id="rangeInterest" type="range" name="interest" min="0.5" max="7" 
-                value={InterestRate} step="0.1" className="rangeInterest" onChange={(e) => onChange("InterestRate",e)} />
+                value={InterestRate} step="0.1" className="rangeInterest" onChange={(e) => onChangeForm("InterestRate",e)} />
             </div>
             <label id="interestRate" className="col-sm-1 control-label">{InterestRate}</label>
           </div>
